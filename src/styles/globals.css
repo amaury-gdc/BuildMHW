@@ -680,7 +680,7 @@ p { margin: 0; }
 /* ===== PICKER DIALOG ===== */
 .picker-dialog .p-dialog { background: var(--surface) !important; border: 1px solid var(--border-strong) !important; border-radius: var(--r-xl) !important; max-width: 680px !important; width: 90vw !important; max-height: 82vh !important; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 24px 64px rgba(0,0,0,.65) !important; }
 .picker-dialog .p-dialog-header { background: var(--surface) !important; border-bottom: 1px solid var(--border) !important; padding: var(--sp-4) var(--sp-5) !important; border-radius: var(--r-xl) var(--r-xl) 0 0 !important; flex-shrink: 0; }
-.picker-dialog .p-dialog-content { background: transparent !important; padding: 0 !important; overflow: hidden !important; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.picker-dialog .p-dialog-content { background: var(--surface) !important; padding: 0 !important; overflow: hidden !important; display: flex; flex-direction: column; flex: 1; min-height: 0; }
 .picker-dialog .p-dialog-header-icon { color: var(--text-faint) !important; border-radius: var(--r-md) !important; }
 .picker-dialog .p-dialog-header-icon:hover { background: var(--bg-alt) !important; color: var(--text) !important; }
 

@@ -1,5 +1,6 @@
 import type { KeyboardEvent } from 'react';
 import { useBuild } from '../../contexts/BuildContext';
+
 import { useLang } from '../../contexts/LangContext';
 import { useT } from '../../hooks/useT';
 import { EQUIPMENT } from '../../data/equipment';
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export default function SlotCard({ slot, onOpenPicker, onOpenDeco }: Props) {
-  const { build, equip } = useBuild();
+  const { build } = useBuild();
   const { lang }         = useLang();
   const t                = useT();
 
@@ -26,11 +27,6 @@ export default function SlotCard({ slot, onOpenPicker, onOpenDeco }: Props) {
 
   const placedDecos = build.decos[slot];
   const rarityVar = item ? rarityColor(item.rarity) : undefined;
-
-  const handleClear = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    equip(slot, null);
-  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -55,21 +51,6 @@ export default function SlotCard({ slot, onOpenPicker, onOpenDeco }: Props) {
       onKeyDown={handleKeyDown}
       aria-label={`${t(`slot_${slot}` as Parameters<typeof t>[0])} : ${isEmpty ? t('select_empty') : (lang === 'fr' ? item.fr : item.en)}`}
     >
-      {/* Bouton × (toujours visible à 0.4, cf. CLAUDE.md §UX-1) */}
-      {!isEmpty && (
-        <button
-          type="button"
-          className="slot-clear-btn"
-          aria-label={t('clear_slot')}
-          onClick={handleClear}
-        >
-          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-            <line x1="1" y1="1" x2="11" y2="11" />
-            <line x1="11" y1="1" x2="1" y2="11" />
-          </svg>
-        </button>
-      )}
-
       {/* Icône */}
       <div className="slot-icon">
         <SlotIcon slot={slot} item={item} />
