@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Dialog } from 'primereact/dialog';
 import { useBuild } from '../../contexts/BuildContext';
 import { useLang } from '../../contexts/LangContext';
@@ -7,6 +8,7 @@ import { EQUIPMENT } from '../../data/equipment';
 import { SKILLS } from '../../data/skills';
 import { rarityColor } from '../../utils/rarity';
 import SlotIcon from '../icons/SlotIcon';
+import ItemTooltip from './ItemTooltip';
 import type { Item, Slot } from '../../types';
 
 type SortKey = 'def_desc' | 'def_asc' | 'atk_desc' | 'atk_asc' | 'rarity' | 'name' | 'slots';
@@ -38,6 +40,34 @@ export default function PickerDialog({ slot, onClose }: Props) {
   const [search,      setSearch]      = useState('');
   const [sort,        setSort]        = useState<SortKey>('def_desc');
   const [skillFilter, setSkillFilter] = useState('');
+
+  const [hoveredItem, setHoveredItem]       = useState<Item | null>(null);
+  const [tooltipPos,  setTooltipPos]        = useState({ x: 0, y: 0 });
+  const [pinnedTooltips, setPinnedTooltips] = useState<Array<{ id: number; item: Item; x: number; y: number }>>([]);
+  const nextIdRef    = useRef(0);
+  const hoveredRef   = useRef<Item | null>(null);
+  const posRef       = useRef({ x: 0, y: 0 });
+
+  hoveredRef.current = hoveredItem;
+  posRef.current     = tooltipPos;
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Alt' && hoveredRef.current) {
+        e.preventDefault();
+        const item = hoveredRef.current;
+        const pos  = posRef.current;
+        setPinnedTooltips(prev => [...prev, { id: nextIdRef.current++, item, x: pos.x, y: pos.y }]);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    setHoveredItem(null);
+    setPinnedTooltips([]);
+  }, [slot]);
 
   const items = slot ? EQUIPMENT[slot] : [];
 
@@ -109,7 +139,28 @@ export default function PickerDialog({ slot, onClose }: Props) {
         { value: 'slots',    label: t('sort_slots') },
       ];
 
+  const tooltipPortal = createPortal(
+    <>
+      {hoveredItem && (
+        <ItemTooltip item={hoveredItem} x={tooltipPos.x} y={tooltipPos.y} lang={lang} />
+      )}
+      {pinnedTooltips.map(({ id, item, x, y }) => (
+        <ItemTooltip
+          key={id}
+          item={item}
+          x={x}
+          y={y}
+          lang={lang}
+          pinned
+          onClose={() => setPinnedTooltips(prev => prev.filter(t => t.id !== id))}
+        />
+      ))}
+    </>,
+    document.body
+  );
+
   return (
+    <>
     <Dialog
       visible={slot !== null}
       onHide={onClose}
@@ -202,6 +253,9 @@ export default function PickerDialog({ slot, onClose }: Props) {
                 style={{ '--rarity': rColor } as React.CSSProperties}
                 onClick={() => handleSelect(item)}
                 aria-pressed={isActive}
+                onMouseEnter={e => { setHoveredItem(item); setTooltipPos({ x: e.clientX, y: e.clientY }); }}
+                onMouseMove={e => setTooltipPos({ x: e.clientX, y: e.clientY })}
+                onMouseLeave={() => setHoveredItem(null)}
               >
                 <div className="picker-item-icon">
                   <SlotIcon slot={slot!} item={item} />
@@ -257,5 +311,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
         )}
       </div>
     </Dialog>
+    {tooltipPortal}
+    </>
   );
 }
