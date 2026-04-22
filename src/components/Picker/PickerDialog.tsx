@@ -166,8 +166,13 @@ export default function PickerDialog({ slot, onClose }: Props) {
       onHide={onClose}
       header={
         <div className="picker-header-content">
-          <span>{title}</span>
-          <span className="picker-count num">{filtered.length} {t('items_available')}</span>
+          <div className="picker-header-icon">
+            <SlotIcon slot={slot!} item={slot === 'weapon' ? (EQUIPMENT[slot].find(i => i.id === currentId) ?? undefined) : undefined} />
+          </div>
+          <div className="picker-header-titles">
+            <span className="picker-header-title">{title}</span>
+            <span className="picker-count">{filtered.length} {t('items_available')}</span>
+          </div>
         </div>
       }
       className="picker-dialog"
@@ -257,54 +262,61 @@ export default function PickerDialog({ slot, onClose }: Props) {
                 onMouseMove={e => setTooltipPos({ x: e.clientX, y: e.clientY })}
                 onMouseLeave={() => setHoveredItem(null)}
               >
-                <div className="picker-item-icon">
-                  <SlotIcon slot={slot!} item={item} />
-                </div>
-
-                <div className="picker-item-body">
-                  <div className="picker-item-top">
-                    <span className="picker-item-name">{lang === 'fr' ? item.fr : item.en}</span>
-                    <span className="picker-item-rarity" style={{ color: rColor }}>R{item.rarity}</span>
+                {isActive && (
+                  <div className="picker-item-check" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="2,6 5,9 10,3" />
+                    </svg>
                   </div>
+                )}
 
-                  {item.origin && (
-                    <span className="picker-item-origin">{item.origin}</span>
-                  )}
-
-                  <div className="picker-item-stats">
-                    {item.attack !== undefined && (
-                      <span className="picker-stat">{t('attack')} <b className="num">{item.attack}</b></span>
-                    )}
-                    {item.affinity !== undefined && item.affinity !== 0 && (
-                      <span className={`picker-stat ${item.affinity >= 0 ? 'stat-pos' : 'stat-neg'}`}>
-                        {t('affinity')} <b className="num">{item.affinity > 0 ? '+' : ''}{item.affinity}%</b>
-                      </span>
-                    )}
-                    {item.defense !== undefined && item.defense > 0 && (
-                      <span className="picker-stat stat-val-def">{t('def')} <b className="num">{item.defense}</b></span>
-                    )}
-                    {/* Slots décos */}
-                    <span className="picker-item-slots">
-                      {item.slots.filter(s => s > 0).map((s, i) => (
-                        <span key={i} className={`picker-slot-pip picker-slot-pip--${s}`}>{s}</span>
-                      ))}
-                    </span>
+                <div className="picker-item-head">
+                  <div className="picker-item-thumb">
+                    <SlotIcon slot={slot!} item={item} />
                   </div>
-
-                  {(item.skills ?? []).length > 0 && (
-                    <div className="picker-item-skills">
-                      {(item.skills ?? []).map(s => {
-                        const sk = SKILLS[s.id];
-                        if (!sk) return null;
-                        return (
-                          <span key={s.id} className={`skill-badge skill-badge--${sk.cat}`}>
-                            {lang === 'fr' ? sk.fr : sk.en} {s.lvl}
-                          </span>
-                        );
-                      })}
+                  <div className="picker-item-title-area">
+                    <div className="picker-item-name-row">
+                      <span className="picker-item-name">{lang === 'fr' ? item.fr : item.en}</span>
+                      <span className="picker-rarity-pill">R{item.rarity}</span>
                     </div>
-                  )}
+                    {item.origin && (
+                      <span className="picker-item-origin">{item.origin}</span>
+                    )}
+                  </div>
                 </div>
+
+                <div className="picker-item-stats">
+                  {item.attack !== undefined && (
+                    <span className="picker-stat">{t('attack')} <b className="num">{item.attack}</b></span>
+                  )}
+                  {item.affinity !== undefined && item.affinity !== 0 && (
+                    <span className={`picker-stat ${item.affinity >= 0 ? 'stat-pos' : 'stat-neg'}`}>
+                      {t('affinity')} <b className="num">{item.affinity > 0 ? '+' : ''}{item.affinity}%</b>
+                    </span>
+                  )}
+                  {item.defense !== undefined && item.defense > 0 && (
+                    <span className="picker-stat stat-val-def">{t('def')} <b className="num">{item.defense}</b></span>
+                  )}
+                  <span className="picker-item-slots">
+                    {item.slots.filter(s => s > 0).map((s, i) => (
+                      <span key={i} className={`picker-slot-pip picker-slot-pip--${s}`}>{s}</span>
+                    ))}
+                  </span>
+                </div>
+
+                {(item.skills ?? []).length > 0 && (
+                  <div className="picker-item-skills">
+                    {(item.skills ?? []).map(s => {
+                      const sk = SKILLS[s.id];
+                      if (!sk) return null;
+                      return (
+                        <span key={s.id} className={`skill-badge skill-badge--${sk.cat}`}>
+                          {lang === 'fr' ? sk.fr : sk.en} {s.lvl}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
               </button>
             );
           })
