@@ -1,5 +1,6 @@
 import type { Item, Slot } from '../../types';
 import { weaponIconUrl, slotIconUrl } from '../../utils/icons';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface Props {
   slot: Slot;
@@ -54,6 +55,8 @@ function FallbackSvg({ slot }: { slot: Slot }) {
 }
 
 export default function SlotIcon({ slot, item }: Props) {
+  const { theme } = useTheme();
+
   let pngSrc: string | undefined;
   const rarity = item?.rarity ?? 8;
 
@@ -64,7 +67,10 @@ export default function SlotIcon({ slot, item }: Props) {
   }
 
   if (pngSrc) {
-    return <img src={pngSrc} alt="" aria-hidden="true" />;
+    const imgStyle = theme !== 'guild'
+      ? { filter: 'brightness(0.15) contrast(1.8)' }
+      : undefined;
+    return <img src={pngSrc} alt="" aria-hidden="true" style={imgStyle} />;
   }
 
   return <FallbackSvg slot={slot} />;
