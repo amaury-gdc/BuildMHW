@@ -40,6 +40,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
   const [search,      setSearch]      = useState('');
   const [sort,        setSort]        = useState<SortKey>('def_desc');
   const [skillFilter, setSkillFilter] = useState('');
+  const [weaponType,  setWeaponType]  = useState('');
 
   const [hoveredItem, setHoveredItem]       = useState<Item | null>(null);
   const [tooltipPos,  setTooltipPos]        = useState({ x: 0, y: 0 });
@@ -67,12 +68,23 @@ export default function PickerDialog({ slot, onClose }: Props) {
   useEffect(() => {
     setHoveredItem(null);
     setPinnedTooltips([]);
+    setWeaponType('');
   }, [slot]);
 
   const items = useMemo(() => (slot ? EQUIPMENT[slot] : []), [slot]);
 
   const isWeapon = slot === 'weapon';
   const defaultSort: SortKey = isWeapon ? 'atk_desc' : 'def_desc';
+
+  // Liste des types d'armes uniques (uniquement pour le slot weapon)
+  const weaponTypes = useMemo(() => {
+    if (!isWeapon) return [];
+    const seen = new Set<string>();
+    for (const item of EQUIPMENT['weapon']) {
+      if (item.type) seen.add(item.type);
+    }
+    return Array.from(seen).sort();
+  }, [isWeapon]);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
@@ -88,11 +100,12 @@ export default function PickerDialog({ slot, onClose }: Props) {
         if (!sk) return false;
         return (lang === 'fr' ? sk.fr : sk.en).toLowerCase().includes(q);
       });
-      return (matchName || matchSkillName) && matchSkill;
+      const matchType = !weaponType || item.type === weaponType;
+      return (matchName || matchSkillName) && matchSkill && matchType;
     });
 
     return sortItems(result, sort || defaultSort);
-  }, [items, search, sort, skillFilter, lang, defaultSort]);
+  }, [items, search, sort, skillFilter, lang, defaultSort, weaponType]);
 
   const skillOptions = useMemo(() => {
     const seen = new Map<string, string>();
@@ -203,6 +216,22 @@ export default function PickerDialog({ slot, onClose }: Props) {
         </div>
 
         <div className="picker-controls">
+          {isWeapon && weaponTypes.length > 0 && (
+            <label className="picker-select-wrap">
+              <span className="picker-select-label">{t('filter_weapon_type')}</span>
+              <select
+                className="picker-select"
+                value={weaponType}
+                onChange={e => setWeaponType(e.target.value)}
+              >
+                <option value="">— {t('all')} —</option>
+                {weaponTypes.map(type => (
+                  <option key={type} value={type}>{type}</option>
+                ))}
+              </select>
+            </label>
+          )}
+
           <label className="picker-select-wrap">
             <span className="picker-select-label">{t('sort_by')}</span>
             <select
