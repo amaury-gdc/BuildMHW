@@ -1,5 +1,5 @@
 import type { Item, Slot } from '../../types';
-import { WEAPON_PNG, SLOT_PNG } from '../../utils/icons';
+import { weaponIconUrl, slotIconUrl } from '../../utils/icons';
 
 interface Props {
   slot: Slot;
@@ -55,11 +55,12 @@ function FallbackSvg({ slot }: { slot: Slot }) {
 
 export default function SlotIcon({ slot, item }: Props) {
   let pngSrc: string | undefined;
+  const rarity = item?.rarity ?? 8;
 
   if (slot === 'weapon' && item?.type) {
-    pngSrc = WEAPON_PNG[item.type];
+    pngSrc = weaponIconUrl(item.type, rarity);
   } else if (slot !== 'weapon') {
-    pngSrc = SLOT_PNG[slot];
+    pngSrc = slotIconUrl(slot, rarity);
   }
 
   if (pngSrc) {

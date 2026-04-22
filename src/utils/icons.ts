@@ -2,28 +2,40 @@ import type { Slot } from '../types';
 
 const base = import.meta.env.BASE_URL;
 
-export const WEAPON_PNG: Record<string, string> = {
-  'Great Sword':   `${base}icons/MHWilds-Great_Sword_Icon_Rare_8.png`,
-  'Long Sword':    `${base}icons/MHWilds-Long_Sword_Icon_Rare_8.png`,
-  'Dual Blades':   `${base}icons/MHWilds-Dual_Blades_Icon_Rare_8.png`,
-  'Lance':         `${base}icons/MHWilds-Lance_Icon_Rare_8.png`,
-  'Gunlance':      `${base}icons/MHWilds-Gunlance_Icon_Rare_8.png`,
-  'Hunting Horn':  `${base}icons/MHWilds-Hunting_Horn_Icon_Rare_8.png`,
-  'Insect Glaive': `${base}icons/MHWilds-Insect_Glaive_Icon_Rare_8.png`,
-  'Bow':           `${base}icons/MHWilds-Bow_Icon_Rare_8.png`,
-  'Light Bowgun':  `${base}icons/MHWilds-Light_Bowgun_Icon_Rare_8.png`,
-  'Hammer':        `${base}icons/MHWilds-Hammer_Icon_Rare_8.png`,
-  'Heavy Bowgun':  `${base}icons/MHWilds-Heavy_Bowgun_Icon_Rare_8.png`,
-  'Switch Axe':    `${base}icons/MHWilds-Switch_Axe_Icon_Rare_8.png`,
-  'Charge Blade':  `${base}icons/MHWilds-Charge_Blade_Icon_Rare_8.png`,
-  'SnS':           `${base}icons/MHWilds-Sword_and_Shield_Icon_Rare_8.png`,
+const WEAPON_FILE: Record<string, string> = {
+  'Great Sword':   'Great_Sword',
+  'Long Sword':    'Long_Sword',
+  'Dual Blades':   'Dual_Blades',
+  'Lance':         'Lance',
+  'Gunlance':      'Gunlance',
+  'Hunting Horn':  'Hunting_Horn',
+  'Insect Glaive': 'Insect_Glaive',
+  'Bow':           'Bow',
+  'Light Bowgun':  'Light_Bowgun',
+  'Hammer':        'Hammer',
+  'Heavy Bowgun':  'Heavy_Bowgun',
+  'Switch Axe':    'Switch_Axe',
+  'Charge Blade':  'Charge_Blade',
+  'SnS':           'Sword_and_Shield',
 };
 
-export const SLOT_PNG: Partial<Record<Slot, string>> = {
-  head:     `${base}icons/MHWilds-Helmet_Icon_Rare_8.png`,
-  chest:    `${base}icons/MHWilds-Chestplate_Icon_Rare_8.png`,
-  arms:     `${base}icons/MHWilds-Armguards_Icon_Rare_8.png`,
-  waist:    `${base}icons/MHWilds-Waist_Icon_Rare_8.png`,
-  legs:     `${base}icons/MHWilds-Leggings_Icon_Rare_8.png`,
-  talisman: `${base}icons/MHWilds-Talisman_Icon_Rare_8.png`,
+const SLOT_FILE: Partial<Record<Slot, string>> = {
+  head:     'Helmet',
+  chest:    'Chestplate',
+  arms:     'Armguards',
+  waist:    'Waist',
+  legs:     'Leggings',
+  talisman: 'Talisman',
 };
+
+export function weaponIconUrl(type: string, rarity: number): string | undefined {
+  const file = WEAPON_FILE[type];
+  if (!file) return undefined;
+  return `${base}icons/MHWilds-${file}_Icon_Rare_${rarity}.png`;
+}
+
+export function slotIconUrl(slot: Slot, rarity: number): string | undefined {
+  const file = SLOT_FILE[slot];
+  if (!file) return undefined;
+  return `${base}icons/MHWilds-${file}_Icon_Rare_${rarity}.png`;
+}
