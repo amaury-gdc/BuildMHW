@@ -2,12 +2,9 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { LangProvider }  from './contexts/LangContext';
 import { BuildProvider } from './contexts/BuildContext';
 
-import Header       from './components/Header/Header';
-import SlotGrid     from './components/SlotGrid/SlotGrid';
-import MetaPanel    from './components/MetaPanel/MetaPanel';
-import SetBonusPanel from './components/SetBonusPanel/SetBonusPanel';
-import StatsPanel   from './components/StatsPanel/StatsPanel';
-import SkillsPanel  from './components/SkillsPanel/SkillsPanel';
+import Header     from './components/Header/Header';
+import SlotGrid   from './components/SlotGrid/SlotGrid';
+import RightPanel from './components/RightPanel/RightPanel';
 
 export default function App() {
   return (
@@ -17,18 +14,11 @@ export default function App() {
           <div className="app">
             <Header />
             <main className="main">
-              <aside className="side-left">
-                <MetaPanel />
-                <SetBonusPanel />
-              </aside>
-
-              <section>
+              <section className="builder-section">
                 <SlotGrid />
               </section>
-
               <aside className="side-right">
-                <StatsPanel />
-                <SkillsPanel />
+                <RightPanel />
               </aside>
             </main>
           </div>

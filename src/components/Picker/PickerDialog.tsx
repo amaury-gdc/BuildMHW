@@ -53,7 +53,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Alt' && hoveredRef.current) {
+      if ((e.key === 'Control' || e.key === 'AltGraph') && hoveredRef.current) {
         e.preventDefault();
         const item = hoveredRef.current;
         const pos  = posRef.current;
@@ -176,6 +176,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
         </div>
       }
       className="picker-dialog"
+      style={{ width: '78vw', maxWidth: '78vw' }}
       modal
       dismissableMask
       resizable={false}
