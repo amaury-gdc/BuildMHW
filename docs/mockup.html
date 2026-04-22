@@ -1,0 +1,2156 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="guild" data-lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wilds Builder — Maquette</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Sprite SVG inline — tous les assets -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <defs>
+      <!-- ==== Icônes d'emplacement — pastilles carrées comme dans MH ==== -->
+      <symbol id="ico-weapon" viewBox="0 0 48 48">
+        <path d="M8 40 L18 30 L32 16 L36 20 L22 34 L12 44 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M32 16 L40 8 L44 12 L36 20 Z" fill="currentColor" opacity=".85"/>
+        <circle cx="11" cy="41" r="2" fill="currentColor"/>
+      </symbol>
+      <symbol id="ico-weapon2" viewBox="0 0 48 48">
+        <path d="M24 4 L28 22 L36 30 L36 42 L26 42 L26 34 L22 34 L22 42 L12 42 L12 30 L20 22 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <circle cx="24" cy="14" r="2" fill="currentColor"/>
+      </symbol>
+      <symbol id="ico-head" viewBox="0 0 48 48">
+        <path d="M8 20 C8 12 14 6 24 6 C34 6 40 12 40 20 L40 30 C40 34 36 38 32 38 L30 38 L30 44 L18 44 L18 38 L16 38 C12 38 8 34 8 30 Z"
+              fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M24 6 L24 2 M20 2 L28 2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M16 18 L20 14 M28 14 L32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ico-chest" viewBox="0 0 48 48">
+        <path d="M10 12 L18 8 L24 12 L30 8 L38 12 L36 28 L32 42 L16 42 L12 28 Z"
+              fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M24 12 L24 42" stroke="currentColor" stroke-width="2"/>
+        <path d="M15 22 L22 22 M26 22 L33 22 M16 30 L22 30 M26 30 L32 30" stroke="currentColor" stroke-width="1.6" opacity=".7"/>
+      </symbol>
+      <symbol id="ico-arms" viewBox="0 0 48 48">
+        <path d="M6 10 L18 6 L18 30 L14 42 L4 42 L2 30 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M30 6 L42 10 L46 30 L44 42 L34 42 L30 30 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M9 16 L15 16 M9 22 L15 22 M33 16 L39 16 M33 22 L39 22" stroke="currentColor" stroke-width="1.6" opacity=".7"/>
+      </symbol>
+      <symbol id="ico-waist" viewBox="0 0 48 48">
+        <path d="M4 16 L44 16 L42 32 L6 32 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <rect x="19" y="20" width="10" height="8" fill="none" stroke="currentColor" stroke-width="2" />
+        <circle cx="24" cy="24" r="1.8" fill="currentColor"/>
+        <path d="M8 24 L17 24 M31 24 L40 24" stroke="currentColor" stroke-width="1.6" opacity=".7"/>
+      </symbol>
+      <symbol id="ico-legs" viewBox="0 0 48 48">
+        <path d="M10 6 L22 6 L20 26 L17 44 L8 44 L10 26 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M26 6 L38 6 L38 26 L40 44 L31 44 L28 26 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M12 16 L18 16 M30 16 L36 16 M12 24 L18 24 M30 24 L36 24" stroke="currentColor" stroke-width="1.6" opacity=".7"/>
+      </symbol>
+      <symbol id="ico-talisman" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="16" fill="none" stroke="currentColor" stroke-width="2.4"/>
+        <path d="M24 12 L28 22 L24 32 L20 22 Z" fill="currentColor" opacity=".4"/>
+        <circle cx="24" cy="24" r="3" fill="currentColor"/>
+        <path d="M24 8 L24 4 M36 24 L40 24 M24 40 L24 44 M8 24 L12 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+
+      <!-- ==== Icônes d'éléments — diamants (style MH) ==== -->
+      <symbol id="ico-fire" viewBox="0 0 24 24">
+        <path d="M12 2 L22 12 L12 22 L2 12 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="ico-water" viewBox="0 0 24 24">
+        <path d="M12 2 L22 12 L12 22 L2 12 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="ico-thunder" viewBox="0 0 24 24">
+        <path d="M12 2 L22 12 L12 22 L2 12 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="ico-ice" viewBox="0 0 24 24">
+        <path d="M12 2 L22 12 L12 22 L2 12 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="ico-dragon" viewBox="0 0 24 24">
+        <path d="M12 2 L22 12 L12 22 L2 12 Z" fill="currentColor"/>
+      </symbol>
+
+      <!-- ==== Utilitaires ==== -->
+      <symbol id="ico-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+      <symbol id="ico-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+      <symbol id="ico-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="ico-defense" viewBox="0 0 24 24"><path d="M12 2 L20 5 L20 12 C20 17 16 21 12 22 C8 21 4 17 4 12 L4 5 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M12 6 L16 8 L16 13 C16 15 14 18 12 19 C10 18 8 15 8 13 L8 8 Z" fill="currentColor" opacity=".45"/></symbol>
+      <symbol id="ico-deco" viewBox="0 0 24 24"><path d="M12 2 L22 12 L12 22 L2 12 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M12 7 L17 12 L12 17 L7 12 Z" fill="currentColor" opacity=".55"/></symbol>
+      <symbol id="ico-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></symbol>
+      <symbol id="ico-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
+      <symbol id="ico-crest" viewBox="0 0 64 64">
+        <path d="M32 4 L54 12 L54 28 C54 42 44 52 32 56 C20 52 10 42 10 28 L10 12 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M32 16 L42 22 L38 36 L26 36 L22 22 Z" fill="currentColor" opacity=".35"/>
+        <circle cx="32" cy="28" r="3.5" fill="currentColor"/>
+        <path d="M32 36 L32 46 M26 40 L32 46 L38 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <!-- Badges de talent (pastilles rondes colorées style MH) -->
+      <symbol id="ico-skill-atk" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="currentColor"/>
+        <path d="M7 12 L17 12 M12 7 L17 12 L12 17" stroke="white" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ico-skill-def" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="currentColor"/>
+        <path d="M12 5 L18 8 L18 13 C18 16 15 19 12 20 C9 19 6 16 6 13 L6 8 Z" fill="white" opacity=".9"/>
+      </symbol>
+      <symbol id="ico-skill-util" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="currentColor"/>
+        <circle cx="12" cy="12" r="4" fill="white"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <style>
+    /* ==========================================================
+       DESIGN TOKENS
+       ========================================================== */
+    :root {
+      --font-ui: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-num: 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
+
+      --text-xs: 11px;
+      --text-sm: 13px;
+      --text-md: 15px;
+      --text-lg: 17px;
+      --text-xl: 21px;
+      --text-2xl: 28px;
+      --text-3xl: 38px;
+
+      --w-regular: 500;
+      --w-medium: 600;
+      --w-bold: 700;
+      --w-heavy: 800;
+
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px;
+      --sp-6: 24px; --sp-7: 28px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+
+      --r-sm: 3px; --r-md: 6px; --r-lg: 10px; --r-xl: 14px; --r-full: 999px;
+
+      --ease: cubic-bezier(.22, .9, .28, 1);
+      --dur-fast: 140ms; --dur-med: 260ms; --dur-slow: 420ms;
+
+      /* Couleurs d'éléments — calées sur MH Wilds */
+      --el-fire:    #e06a5a;
+      --el-water:   #5aa5d8;
+      --el-thunder: #e0d050;
+      --el-ice:     #90d8dc;
+      --el-dragon:  #c566b0;
+
+      /* Raretés MH (1-8) */
+      --rarity-1: #b8b0a2;
+      --rarity-2: #c5b78b;
+      --rarity-3: #90b076;
+      --rarity-4: #5ea5ab;
+      --rarity-5: #7b71b8;
+      --rarity-6: #b36a86;
+      --rarity-7: #d48a3c;
+      --rarity-8: #e8aa3d;
+    }
+
+    /* ==========================================================
+       THEME — GUILD (défaut, style MH Wilds in-game)
+       dark warm brown avec accents or/crème
+       ========================================================== */
+    [data-theme="guild"] {
+      --bg: #1a140b;
+      --bg-alt: #231b10;
+      --bg-vignette: radial-gradient(ellipse at top, #2a2012 0%, #130e07 100%);
+      --surface: rgba(38, 29, 17, 0.92);
+      --surface-2: rgba(52, 40, 22, 0.88);
+      --surface-elev: rgba(62, 48, 26, 0.95);
+      --border: rgba(196, 160, 94, 0.28);
+      --border-strong: rgba(212, 170, 80, 0.55);
+      --border-gold: #c29d4f;
+
+      --text: #ede1b8;
+      --text-muted: #b8a77a;
+      --text-faint: #8a7a55;
+
+      --accent: #e8b653;           /* or chaud MH */
+      --accent-2: #f3d188;
+      --accent-soft: rgba(232, 182, 83, 0.18);
+      --accent-contrast: #1a140b;
+
+      --ok: #a0c075;
+      --warn: #e8b653;
+      --danger: #e06a5a;
+
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, .4);
+      --shadow-md: 0 10px 24px rgba(0, 0, 0, .55), 0 2px 4px rgba(0, 0, 0, .4);
+      --shadow-lg: 0 30px 70px rgba(0, 0, 0, .75), 0 4px 10px rgba(0, 0, 0, .5);
+      --inset-line: inset 0 1px 0 rgba(245, 215, 140, .12);
+      --gold-line: linear-gradient(90deg, transparent, rgba(212, 170, 80, .6), transparent);
+    }
+
+    /* ==========================================================
+       THEME — PARCHMENT (clair, journal de chasseur)
+       ========================================================== */
+    [data-theme="parchment"] {
+      --bg: #ebe0c9;
+      --bg-alt: #e0d2b4;
+      --bg-vignette: radial-gradient(ellipse at top, #f0e4ca 0%, #d8c9a6 100%);
+      --surface: #f5ecd4;
+      --surface-2: #eadfb9;
+      --surface-elev: #fbf4e0;
+      --border: rgba(140, 110, 60, 0.35);
+      --border-strong: rgba(140, 110, 60, 0.65);
+      --border-gold: #a0874f;
+      --text: #2a1e10;
+      --text-muted: #6a5638;
+      --text-faint: #9a8965;
+      --accent: #a0451a;
+      --accent-2: #c57a2d;
+      --accent-soft: rgba(197, 122, 45, 0.22);
+      --accent-contrast: #fbf4e0;
+      --ok: #4d7634;
+      --warn: #a8761c;
+      --danger: #a83a2a;
+      --shadow-sm: 0 1px 2px rgba(70, 45, 18, .12);
+      --shadow-md: 0 6px 18px rgba(70, 45, 18, .14), 0 1px 3px rgba(70, 45, 18, .1);
+      --shadow-lg: 0 22px 50px rgba(70, 45, 18, .22), 0 2px 6px rgba(70, 45, 18, .12);
+      --inset-line: inset 0 1px 0 rgba(255, 245, 220, .45);
+      --gold-line: linear-gradient(90deg, transparent, rgba(160, 135, 79, .5), transparent);
+    }
+
+    /* ==========================================================
+       THEME — VERDANT (clair vert, forêt)
+       ========================================================== */
+    [data-theme="verdant"] {
+      --bg: #e7ecde;
+      --bg-alt: #dce3cf;
+      --bg-vignette: radial-gradient(ellipse at top, #eff3e4 0%, #d4dcc4 100%);
+      --surface: #f3f6ea;
+      --surface-2: #e8eed8;
+      --surface-elev: #fafcf3;
+      --border: rgba(85, 105, 70, 0.32);
+      --border-strong: rgba(85, 105, 70, 0.6);
+      --border-gold: #6a8050;
+      --text: #1b2818;
+      --text-muted: #56685a;
+      --text-faint: #829486;
+      --accent: #3a6f3e;
+      --accent-2: #6a9c58;
+      --accent-soft: rgba(106, 156, 88, 0.22);
+      --accent-contrast: #f3f6ea;
+      --ok: #3a6f3e;
+      --warn: #a67318;
+      --danger: #9a3e2c;
+      --shadow-sm: 0 1px 2px rgba(30, 55, 30, .08);
+      --shadow-md: 0 6px 18px rgba(30, 55, 30, .1), 0 1px 3px rgba(30, 55, 30, .06);
+      --shadow-lg: 0 22px 50px rgba(30, 55, 30, .18), 0 2px 6px rgba(30, 55, 30, .08);
+      --inset-line: inset 0 1px 0 rgba(255, 255, 240, .5);
+      --gold-line: linear-gradient(90deg, transparent, rgba(106, 128, 80, .5), transparent);
+    }
+
+    /* ==========================================================
+       BASE
+       ========================================================== */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--font-ui);
+      font-size: var(--text-md);
+      font-weight: var(--w-medium);
+      color: var(--text);
+      background: var(--bg);
+      background-image: var(--bg-vignette);
+      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+      letter-spacing: 0.005em;
+      transition: background var(--dur-med) var(--ease), color var(--dur-med) var(--ease);
+    }
+    [data-theme="guild"] body {
+      background-image:
+        var(--bg-vignette),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .12 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      background-attachment: fixed, fixed;
+    }
+
+    button { font-family: inherit; font-weight: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+    input, select { font-family: inherit; color: inherit; }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-ui);
+      font-weight: var(--w-bold);
+      letter-spacing: 0.01em;
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    /* Numérique punchy */
+    .num { font-family: var(--font-num); font-weight: var(--w-heavy); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+
+    /* ==========================================================
+       HEADER
+       ========================================================== */
+    .app { display: grid; grid-template-rows: auto 1fr; min-height: 100vh; }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      padding: var(--sp-3) var(--sp-6);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border-strong);
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .header::after {
+      content: "";
+      position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+      background: var(--gold-line);
+      pointer-events: none;
+    }
+    .brand { display: flex; align-items: center; gap: var(--sp-3); }
+    .brand-mark {
+      width: 44px; height: 44px;
+      border-radius: var(--r-md);
+      background:
+        radial-gradient(circle at 30% 25%, var(--accent-2), var(--accent) 60%, color-mix(in srgb, var(--accent) 50%, #000) 100%);
+      display: grid; place-items: center;
+      color: var(--accent-contrast);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.3);
+      border: 1px solid color-mix(in srgb, var(--accent) 60%, #000);
+    }
+    .brand-mark svg { width: 28px; height: 28px; }
+    .brand-name {
+      font-size: var(--text-xl);
+      font-weight: var(--w-heavy);
+      line-height: 1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .brand-sub {
+      color: var(--text-faint);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-weight: var(--w-bold);
+      margin-top: 4px;
+    }
+
+    .header-name-field {
+      flex: 0 1 280px;
+      display: flex; align-items: center; gap: var(--sp-2);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 7px 12px;
+      transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+    }
+    .header-name-field:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+    }
+    .header-name-field input {
+      border: 0; background: none; outline: none;
+      font-size: var(--text-md);
+      font-weight: var(--w-bold);
+      flex: 1;
+    }
+    .header-name-field .label {
+      font-size: 10px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: var(--w-heavy);
+    }
+
+    .header-spacer { flex: 1; }
+
+    .header-actions { display: flex; align-items: center; gap: var(--sp-2); }
+
+    .segmented {
+      display: inline-flex;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 3px;
+      gap: 2px;
+    }
+    .segmented button {
+      padding: 6px 13px;
+      font-size: var(--text-sm);
+      border-radius: var(--r-sm);
+      color: var(--text-muted);
+      font-weight: var(--w-bold);
+      letter-spacing: 0.04em;
+      transition: all var(--dur-fast) var(--ease);
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 36px;
+    }
+    .segmented button[aria-pressed="true"] {
+      background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 80%, #000));
+      color: var(--accent-contrast);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+    }
+    .segmented button:hover:not([aria-pressed="true"]) { color: var(--text); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      padding: 8px 16px;
+      border-radius: var(--r-md);
+      font-size: var(--text-sm);
+      font-weight: var(--w-bold);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: all var(--dur-fast) var(--ease);
+      border: 1px solid transparent;
+    }
+    .btn svg { width: 15px; height: 15px; }
+    .btn--ghost { color: var(--text-muted); border-color: var(--border); background: var(--bg-alt); }
+    .btn--ghost:hover { color: var(--text); background: var(--surface-2); border-color: var(--border-strong); }
+    .btn--primary {
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+      color: var(--accent-contrast);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.25);
+      border: 1px solid color-mix(in srgb, var(--accent) 70%, #000);
+    }
+    .btn--primary:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.25); }
+
+    /* ==========================================================
+       MAIN LAYOUT
+       ========================================================== */
+    .main {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr) 340px;
+      gap: var(--sp-5);
+      padding: var(--sp-5) var(--sp-6);
+      max-width: 1520px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    @media (max-width: 1240px) {
+      .main { grid-template-columns: minmax(0, 1fr) 320px; }
+      .side-left { display: none; }
+    }
+    @media (max-width: 900px) {
+      .main { grid-template-columns: 1fr; }
+      .side-right { order: 2; }
+    }
+
+    /* ==========================================================
+       LEFT RAIL
+       ========================================================== */
+    .side-left { display: flex; flex-direction: column; gap: var(--sp-4); }
+
+    .panel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-5);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    [data-theme="guild"] .panel-card {
+      background-image:
+        var(--gold-line),
+        linear-gradient(var(--surface), var(--surface));
+      background-repeat: no-repeat, no-repeat;
+      background-size: 100% 1px, 100% 100%;
+      background-position: 0 0, 0 0;
+    }
+
+    .panel-card h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--w-bold);
+      display: flex; align-items: baseline; gap: var(--sp-2);
+      margin-bottom: var(--sp-4);
+      padding-bottom: var(--sp-2);
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      font-family: var(--font-ui);
+    }
+    .panel-card h3 .count {
+      color: var(--text-faint);
+      font-size: var(--text-xs);
+      font-weight: var(--w-heavy);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .meta-card .meta-crest {
+      width: 68px; height: 68px;
+      margin: 0 auto var(--sp-2);
+      display: grid; place-items: center;
+      color: var(--accent);
+      filter: drop-shadow(0 2px 8px color-mix(in srgb, var(--accent) 40%, transparent));
+    }
+    .meta-card .meta-crest svg { width: 68px; height: 68px; }
+    .meta-title {
+      text-align: center;
+      font-size: var(--text-lg);
+      font-weight: var(--w-heavy);
+      color: var(--text);
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .meta-sub {
+      text-align: center;
+      color: var(--text-faint);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: var(--w-bold);
+      margin-bottom: var(--sp-4);
+      padding-bottom: var(--sp-3);
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 0;
+      font-size: var(--text-sm);
+    }
+    .meta-row + .meta-row { border-top: 1px solid var(--border); }
+    .meta-row .key { color: var(--text-muted); font-weight: var(--w-medium); text-transform: uppercase; letter-spacing: 0.06em; font-size: var(--text-xs); }
+    .meta-row .val { color: var(--text); font-weight: var(--w-heavy); font-family: var(--font-num); font-size: var(--text-md); }
+
+    .set-bonuses { display: flex; flex-direction: column; gap: var(--sp-2); }
+    .set-bonus {
+      padding: var(--sp-3) var(--sp-3) var(--sp-3) var(--sp-4);
+      border-radius: var(--r-md);
+      background: var(--surface-2);
+      border-left: 3px solid var(--accent);
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .set-bonus .set-name { font-size: var(--text-sm); font-weight: var(--w-bold); color: var(--text); }
+    .set-bonus .set-count { font-size: 10px; color: var(--accent); font-weight: var(--w-heavy); text-transform: uppercase; letter-spacing: 0.12em; }
+    .set-bonuses .empty-line {
+      padding: var(--sp-3);
+      text-align: center;
+      color: var(--text-faint);
+      font-size: var(--text-sm);
+      font-style: italic;
+      font-weight: var(--w-medium);
+    }
+
+    /* ==========================================================
+       SLOT GRID (centre)
+       ========================================================== */
+    .builder-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: var(--sp-4);
+      gap: var(--sp-3);
+      padding-bottom: var(--sp-3);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .builder-header::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+      background: var(--gold-line);
+    }
+    .builder-header h2 {
+      font-size: var(--text-2xl);
+      font-weight: var(--w-heavy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+    .builder-header .sub { color: var(--text-muted); font-size: var(--text-sm); font-weight: var(--w-medium); }
+
+    .slot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--sp-3);
+    }
+    .slot-grid .slot--weapon,
+    .slot-grid .slot--talisman { grid-column: span 2; }
+    @media (max-width: 700px) {
+      .slot-grid { grid-template-columns: 1fr; }
+      .slot-grid .slot--weapon, .slot-grid .slot--talisman { grid-column: span 1; }
+    }
+
+    .slot {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-4);
+      display: flex;
+      align-items: stretch;
+      gap: var(--sp-4);
+      cursor: pointer;
+      transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+      text-align: left;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px;
+      box-shadow: var(--shadow-sm);
+    }
+    .slot-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+    .slot-content > .slot-body-row:last-child {
+      margin-top: auto;
+    }
+    .slot-name-wrap { min-width: 0; }
+    [data-theme="guild"] .slot {
+      background:
+        linear-gradient(var(--surface), var(--surface));
+    }
+    .slot::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--rarity, var(--border-strong));
+      box-shadow: 0 0 12px color-mix(in srgb, var(--rarity, var(--border-strong)) 60%, transparent);
+    }
+    .slot::after {
+      content: "";
+      position: absolute; left: 0; right: 0; top: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--rarity, var(--border-strong)) 70%, transparent), transparent);
+      pointer-events: none;
+    }
+    .slot:hover {
+      border-color: color-mix(in srgb, var(--accent) 40%, var(--border-strong));
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+    .slot:hover .slot-icon {
+      border-color: color-mix(in srgb, var(--accent) 60%, var(--border-strong));
+    }
+    .slot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .slot:active { transform: translateY(0); }
+
+    .slot--empty .slot-item-name {
+      color: var(--text-faint); font-style: italic; font-weight: var(--w-medium);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .slot--empty .slot-item-name::before {
+      content: "＋";
+      color: var(--accent);
+      font-weight: var(--w-black);
+      font-style: normal;
+      font-size: 16px;
+      line-height: 1;
+    }
+    .slot--empty .slot-stats,
+    .slot--empty .slot-skills,
+    .slot--empty .slot-origin { display: none; }
+    .slot--empty .slot-icon { opacity: .45; }
+    .slot--empty:hover .slot-icon { opacity: .85; border-color: var(--accent); }
+    .slot--empty:hover { border-style: dashed; border-color: color-mix(in srgb, var(--accent) 55%, var(--border-strong)); }
+
+    /* Icône du slot : tuile bronze façon MH */
+    .slot-icon {
+      width: 72px; height: 72px;
+      border-radius: var(--r-md);
+      background:
+        linear-gradient(135deg, rgba(212, 170, 80, .18), rgba(212, 170, 80, .04));
+      border: 1px solid var(--border-strong);
+      display: grid; place-items: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      position: relative;
+      box-shadow: inset 0 1px 0 rgba(255, 220, 150, .18), inset 0 -1px 0 rgba(0,0,0,.2);
+      transition: border-color var(--dur-fast) var(--ease);
+    }
+    [data-theme="parchment"] .slot-icon,
+    [data-theme="verdant"] .slot-icon {
+      background: var(--surface-2);
+    }
+    .slot-icon svg { width: 42px; height: 42px; }
+    .slot-icon img {
+      width: 58px; height: 58px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.55));
+      image-rendering: -webkit-optimize-contrast;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .slot-icon--img { padding: 4px; }
+    .slot-icon--img::after { display: none; }
+    .slot-icon::after {
+      content: ""; position: absolute; inset: 4px;
+      border: 1px solid color-mix(in srgb, var(--border-strong) 50%, transparent);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .slot:hover .slot-icon img {
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,.7)) drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 30%, transparent));
+    }
+
+    .slot-header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--sp-2);
+    }
+    .slot-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      font-weight: var(--w-heavy);
+    }
+    .slot-rarity-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: var(--w-heavy);
+      padding: 2px 10px;
+      border-radius: 2px;
+      background: color-mix(in srgb, var(--rarity, var(--border-strong)) 24%, transparent);
+      color: color-mix(in srgb, var(--rarity, var(--text-muted)) 80%, var(--text));
+      border: 1px solid color-mix(in srgb, var(--rarity, var(--border-strong)) 55%, transparent);
+    }
+
+    .slot-item-name {
+      font-size: var(--text-lg);
+      font-weight: var(--w-heavy);
+      color: var(--text);
+      line-height: 1.15;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+    .slot-origin {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      font-weight: var(--w-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-top: -3px;
+    }
+
+    .slot-body-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--sp-3);
+      flex-wrap: wrap;
+      min-height: 22px;
+    }
+
+    .slot-stats {
+      display: flex; flex-wrap: wrap; gap: var(--sp-3);
+      align-items: center;
+    }
+    .stat-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 3px 10px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      font-weight: var(--w-heavy);
+      color: var(--text);
+      font-size: var(--text-xs);
+      font-family: var(--font-num);
+      letter-spacing: 0.04em;
+    }
+    .stat-chip svg { width: 12px; height: 12px; }
+    .stat-chip.def svg { color: var(--accent); }
+    .stat-res {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: var(--text-xs);
+      font-weight: var(--w-heavy);
+      font-family: var(--font-num);
+      padding: 2px 6px;
+    }
+    .stat-res svg { width: 10px; height: 10px; }
+    .stat-res.fire svg { color: var(--el-fire); }
+    .stat-res.water svg { color: var(--el-water); }
+    .stat-res.thunder svg { color: var(--el-thunder); }
+    .stat-res.ice svg { color: var(--el-ice); }
+    .stat-res.dragon svg { color: var(--el-dragon); }
+    .stat-res.pos { color: var(--ok); }
+    .stat-res.neg { color: var(--danger); }
+
+    .slot-skills-wrap {
+      display: flex; flex: 1 1 auto; min-width: 0;
+    }
+    .slot-skills {
+      display: flex; flex-wrap: wrap; gap: 5px;
+    }
+    .skill-pill {
+      background: var(--accent-soft);
+      color: var(--text);
+      font-size: var(--text-xs);
+      padding: 3px 10px 3px 6px;
+      border-radius: var(--r-full);
+      font-weight: var(--w-bold);
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+      display: inline-flex; align-items: center; gap: 5px;
+      letter-spacing: 0.02em;
+    }
+    .skill-pill .skill-dot {
+      width: 14px; height: 14px;
+      border-radius: var(--r-full);
+      background: var(--accent);
+      color: var(--accent-contrast);
+      display: inline-grid; place-items: center;
+      flex-shrink: 0;
+    }
+    .skill-pill .skill-dot svg { width: 10px; height: 10px; }
+    .skill-pill .skill-dot.cat-atk { background: #c14d36; }
+    .skill-pill .skill-dot.cat-def { background: #4a7eb8; }
+    .skill-pill .skill-dot.cat-util { background: #8a6dbe; }
+    .skill-pill .lvl {
+      color: var(--accent);
+      font-weight: var(--w-heavy);
+      font-family: var(--font-num);
+    }
+
+    .slot-decos {
+      display: inline-flex; gap: 5px;
+      align-items: center;
+    }
+    .deco-slot {
+      width: 20px; height: 20px;
+      transform: rotate(45deg);
+      background: var(--bg-alt);
+      border: 1.5px solid var(--border-strong);
+      display: grid; place-items: center;
+      position: relative;
+    }
+    .deco-slot .lvl {
+      transform: rotate(-45deg);
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: var(--w-heavy);
+      font-family: var(--font-num);
+    }
+    .deco-slot.lvl-1 { border-color: #b8b0a2; background: color-mix(in srgb, #b8b0a2 25%, var(--bg-alt)); }
+    .deco-slot.lvl-1 .lvl { color: #d8d0c2; }
+    .deco-slot.lvl-2 { border-color: #5ea5ab; background: color-mix(in srgb, #5ea5ab 22%, var(--bg-alt)); }
+    .deco-slot.lvl-2 .lvl { color: #8ed5db; }
+    .deco-slot.lvl-3 { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 25%, var(--bg-alt)); }
+    .deco-slot.lvl-3 .lvl { color: var(--accent-2); }
+    .deco-slot.empty { opacity: .35; }
+    .deco-slot.empty .lvl { color: var(--text-faint); }
+
+    .slot-clear-btn {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 26px; height: 26px;
+      border-radius: var(--r-sm);
+      color: var(--text-faint);
+      background: var(--bg-alt);
+      display: grid; place-items: center;
+      opacity: 0;
+      transition: all var(--dur-fast) var(--ease);
+      border: 1px solid var(--border);
+    }
+    .slot-clear-btn svg { width: 11px; height: 11px; }
+    .slot:hover .slot-clear-btn { opacity: 1; }
+    .slot-clear-btn:hover { color: var(--danger); border-color: var(--danger); }
+
+    /* ==========================================================
+       RIGHT RAIL
+       ========================================================== */
+    .side-right {
+      display: flex; flex-direction: column; gap: var(--sp-4);
+      position: sticky; top: 92px;
+      align-self: start;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-4);
+    }
+    .stat-block {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--sp-3) var(--sp-4);
+      position: relative;
+    }
+    .stat-block .label {
+      font-size: 10px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: var(--w-heavy);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .stat-block .label svg { width: 12px; height: 12px; color: var(--accent); }
+    .stat-block .value {
+      font-family: var(--font-num);
+      font-size: var(--text-2xl);
+      font-weight: var(--w-heavy);
+      color: var(--text);
+      line-height: 1;
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .res-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+    .res-cell {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--sp-3) 2px var(--sp-2);
+      position: relative;
+    }
+    .res-cell .el-icon {
+      width: 22px; height: 22px;
+      display: grid; place-items: center;
+    }
+    .res-cell .el-icon svg {
+      width: 14px; height: 14px;
+      filter: drop-shadow(0 0 4px currentColor);
+    }
+    .res-cell.el-fire .el-icon svg { color: var(--el-fire); }
+    .res-cell.el-water .el-icon svg { color: var(--el-water); }
+    .res-cell.el-thunder .el-icon svg { color: var(--el-thunder); }
+    .res-cell.el-ice .el-icon svg { color: var(--el-ice); }
+    .res-cell.el-dragon .el-icon svg { color: var(--el-dragon); }
+
+    .res-cell .val {
+      font-family: var(--font-num);
+      font-weight: var(--w-heavy);
+      font-size: var(--text-lg);
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+      line-height: 1;
+    }
+    .res-cell.pos .val { color: var(--ok); }
+    .res-cell.neg .val { color: var(--danger); }
+    .res-cell .res-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+      font-weight: var(--w-heavy);
+    }
+
+    .active-skills-list { display: flex; flex-direction: column; gap: 5px; }
+    .active-skill {
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      align-items: center;
+      gap: var(--sp-3);
+      padding: 8px var(--sp-3);
+      border-radius: var(--r-md);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      transition: all var(--dur-fast) var(--ease);
+    }
+    .active-skill.maxed {
+      background: color-mix(in srgb, var(--accent-soft) 70%, var(--bg-alt));
+      border-color: var(--accent);
+    }
+    .active-skill .skill-badge {
+      width: 22px; height: 22px;
+      border-radius: var(--r-full);
+      display: grid; place-items: center;
+    }
+    .active-skill .skill-badge svg { width: 22px; height: 22px; }
+    .active-skill .skill-badge.cat-atk { color: #c14d36; }
+    .active-skill .skill-badge.cat-def { color: #4a7eb8; }
+    .active-skill .skill-badge.cat-util { color: #8a6dbe; }
+    .active-skill .skill-badge.cat-gen { color: var(--accent); }
+    .active-skill .name {
+      font-size: var(--text-sm);
+      font-weight: var(--w-bold);
+      color: var(--text);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+    .active-skill .level-bar { display: inline-flex; gap: 3px; align-items: center; }
+    .active-skill .level-bar .pip {
+      width: 8px; height: 8px;
+      transform: rotate(45deg);
+      background: transparent;
+      border: 1.5px solid var(--border-strong);
+    }
+    .active-skill .level-bar .pip.active { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 50%, transparent); }
+    .active-skill .level-bar .lvl-num {
+      margin-left: 6px;
+      font-weight: var(--w-heavy);
+      font-size: var(--text-md);
+      color: var(--accent);
+      font-family: var(--font-num);
+      min-width: 16px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .active-skills-empty {
+      text-align: center;
+      padding: var(--sp-6) 0;
+      color: var(--text-faint);
+      font-size: var(--text-sm);
+      font-style: italic;
+      font-weight: var(--w-medium);
+    }
+
+    /* ==========================================================
+       MODAL
+       ========================================================== */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: color-mix(in srgb, var(--bg) 75%, #000);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: grid; place-items: center;
+      padding: var(--sp-4);
+      z-index: 100;
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--dur-med) var(--ease);
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+    .modal {
+      background: var(--surface-elev);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-lg);
+      width: min(1020px, 100%);
+      max-height: min(90vh, 820px);
+      display: flex; flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(12px) scale(0.96);
+      transition: transform var(--dur-med) var(--ease);
+      overflow: hidden;
+      position: relative;
+    }
+    .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
+    .modal::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+      background: var(--gold-line);
+    }
+    .modal::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+      background: var(--gold-line);
+    }
+
+    .modal-header {
+      display: flex; align-items: center; gap: var(--sp-3);
+      padding: var(--sp-4) var(--sp-6);
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface-2), transparent);
+    }
+    .modal-title-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--r-md);
+      background: linear-gradient(135deg, rgba(212, 170, 80, .2), rgba(212, 170, 80, .05));
+      border: 1px solid var(--border-strong);
+      display: grid; place-items: center;
+      color: var(--accent);
+      box-shadow: inset 0 1px 0 rgba(255,220,150,.15);
+    }
+    .modal-title-icon svg { width: 26px; height: 26px; }
+    .modal-title-icon img {
+      width: 36px; height: 36px; object-fit: contain;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.55));
+    }
+    .modal-title-icon.is-img { padding: 2px; }
+    .modal-titles { flex: 1; min-width: 0; }
+    .modal-header h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--w-heavy);
+      margin: 0;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+    .modal-header .modal-subtitle {
+      font-size: var(--text-xs);
+      color: var(--text-faint);
+      font-weight: var(--w-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+    .icon-btn {
+      width: 36px; height: 36px;
+      border-radius: var(--r-sm);
+      display: grid; place-items: center;
+      color: var(--text-muted);
+      transition: all var(--dur-fast) var(--ease);
+      border: 1px solid transparent;
+    }
+    .icon-btn svg { width: 16px; height: 16px; }
+    .icon-btn:hover { background: var(--bg-alt); color: var(--text); border-color: var(--border); }
+
+    .modal-toolbar {
+      padding: var(--sp-3) var(--sp-6);
+      display: flex;
+      gap: var(--sp-3);
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-alt);
+    }
+    .search-field {
+      flex: 1 1 220px;
+      display: flex; align-items: center; gap: var(--sp-2);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 9px 12px;
+      transition: all var(--dur-fast) var(--ease);
+    }
+    .search-field:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+    .search-field svg { color: var(--text-faint); flex-shrink: 0; width: 15px; height: 15px; }
+    .search-field input {
+      border: 0; background: none; outline: none;
+      flex: 1;
+      font-size: var(--text-md);
+      font-weight: var(--w-bold);
+    }
+
+    .select-field {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 8px 28px 8px 12px;
+      font-size: var(--text-sm);
+      color: var(--text);
+      cursor: pointer;
+      position: relative;
+      font-weight: var(--w-bold);
+    }
+    .select-field .label {
+      color: var(--text-faint);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: var(--w-heavy);
+    }
+    .select-field select {
+      appearance: none;
+      border: 0; background: none; outline: none;
+      font-family: inherit;
+      font-size: var(--text-sm);
+      font-weight: var(--w-bold);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .select-field::after {
+      content: "▾";
+      position: absolute;
+      right: 10px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      pointer-events: none;
+      font-size: 11px;
+    }
+
+    .active-filters {
+      display: flex; flex-wrap: wrap; gap: var(--sp-2);
+      padding: var(--sp-3) var(--sp-6) 0;
+    }
+    .filter-chip {
+      background: var(--accent-soft);
+      color: var(--text);
+      font-size: var(--text-xs);
+      padding: 4px 10px;
+      border-radius: var(--r-full);
+      display: inline-flex; align-items: center; gap: 6px;
+      font-weight: var(--w-bold);
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .filter-chip button {
+      font-size: 14px; line-height: 1;
+      color: var(--text-muted); padding: 0 2px;
+      font-weight: var(--w-bold);
+    }
+    .filter-chip button:hover { color: var(--danger); }
+
+    .modal-body {
+      padding: var(--sp-4) var(--sp-6) var(--sp-6);
+      overflow-y: auto;
+      flex: 1;
+    }
+    .item-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--sp-3);
+    }
+    .item-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--sp-3) var(--sp-4);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease);
+      text-align: left;
+      display: flex; flex-direction: column; gap: 7px;
+      position: relative;
+      overflow: hidden;
+    }
+    .item-card::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--rarity, var(--border-strong));
+    }
+    .item-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .item-card.current {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent-soft) 45%, var(--surface));
+    }
+    .item-card.current .check-badge {
+      position: absolute; top: 10px; right: 10px;
+      width: 22px; height: 22px;
+      border-radius: var(--r-full);
+      background: var(--accent);
+      color: var(--accent-contrast);
+      display: grid; place-items: center;
+    }
+    .item-card.current .check-badge svg { width: 12px; height: 12px; }
+    .item-card .item-head {
+      display: flex; align-items: center; gap: var(--sp-3);
+    }
+    .item-card .item-thumb {
+      width: 44px; height: 44px;
+      border-radius: var(--r-sm);
+      background: linear-gradient(135deg, rgba(212, 170, 80, .16), rgba(212, 170, 80, .03));
+      border: 1px solid var(--border-strong);
+      display: grid; place-items: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      box-shadow: inset 0 1px 0 rgba(255, 220, 150, .12);
+    }
+    .item-card .item-thumb svg { width: 26px; height: 26px; }
+    .item-card .item-thumb img {
+      width: 36px; height: 36px;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,.45));
+    }
+    .item-card .rarity-pill {
+      font-size: 9px;
+      font-weight: var(--w-heavy);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 2px 7px;
+      border-radius: 2px;
+      background: color-mix(in srgb, var(--rarity, var(--border-strong)) 25%, transparent);
+      color: color-mix(in srgb, var(--rarity, var(--text-muted)) 85%, var(--text));
+      border: 1px solid color-mix(in srgb, var(--rarity, var(--border-strong)) 55%, transparent);
+      flex-shrink: 0;
+    }
+    .item-card .item-name {
+      font-weight: var(--w-heavy);
+      font-size: var(--text-md);
+      color: var(--text);
+      line-height: 1.2;
+      flex: 1;
+      min-width: 0;
+      letter-spacing: 0.01em;
+    }
+    .item-card .item-name-alt {
+      font-size: var(--text-xs);
+      color: var(--text-faint);
+      font-weight: var(--w-medium);
+      font-style: italic;
+    }
+    .item-card .item-meta {
+      display: flex; flex-wrap: wrap; gap: var(--sp-2);
+      font-size: var(--text-xs); color: var(--text-muted);
+      font-family: var(--font-num);
+      font-weight: var(--w-bold);
+    }
+    .item-card .item-skills { display: flex; flex-wrap: wrap; gap: 4px; }
+
+    .empty-state {
+      text-align: center;
+      padding: var(--sp-10) var(--sp-6);
+      color: var(--text-faint);
+      grid-column: 1 / -1;
+    }
+    .empty-state .ico { font-size: 38px; margin-bottom: var(--sp-2); opacity: .4; color: var(--accent); }
+    .empty-state .title { font-size: var(--text-lg); color: var(--text); margin-bottom: 4px; font-weight: var(--w-heavy); text-transform: uppercase; letter-spacing: 0.05em; }
+    .empty-state .sub { font-size: var(--text-sm); font-weight: var(--w-medium); }
+
+    /* Scrollbar */
+    .modal-body::-webkit-scrollbar, .side-right::-webkit-scrollbar { width: 8px; }
+    .modal-body::-webkit-scrollbar-track, .side-right::-webkit-scrollbar-track { background: transparent; }
+    .modal-body::-webkit-scrollbar-thumb, .side-right::-webkit-scrollbar-thumb {
+      background: var(--border-strong);
+      border-radius: var(--r-full);
+    }
+    .modal-body::-webkit-scrollbar-thumb:hover, .side-right::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    .mockup-footer {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: var(--sp-4) var(--sp-6) var(--sp-10);
+      color: var(--text-faint);
+      font-size: var(--text-xs);
+      text-align: center;
+      font-weight: var(--w-medium);
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="brand">
+      <div class="brand-mark"><svg><use href="#ico-crest"/></svg></div>
+      <div>
+        <div class="brand-name">Wilds Builder</div>
+        <div class="brand-sub" data-i18n="tagline">Monster Hunter Wilds</div>
+      </div>
+    </div>
+
+    <div class="header-name-field">
+      <span class="label" data-i18n="build_label">Build</span>
+      <input type="text" id="buildName" value="" />
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <div class="header-actions">
+      <div class="segmented" role="tablist" aria-label="Theme">
+        <button data-theme-set="guild"     aria-pressed="true" title="Guild">G</button>
+        <button data-theme-set="parchment" aria-pressed="false" title="Parchment">P</button>
+        <button data-theme-set="verdant"   aria-pressed="false" title="Verdant">V</button>
+      </div>
+      <div class="segmented" role="tablist" aria-label="Language">
+        <button data-lang-set="fr" aria-pressed="true">FR</button>
+        <button data-lang-set="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="btn btn--ghost" data-i18n="btn_save"><svg><use href="#ico-save"/></svg> Enregistrer</button>
+      <button class="btn btn--primary" data-i18n="btn_share"><svg><use href="#ico-share"/></svg> Partager</button>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main class="main">
+
+    <!-- ===== LEFT RAIL ===== -->
+    <aside class="side-left">
+      <div class="panel-card meta-card">
+        <div class="meta-crest"><svg><use href="#ico-crest"/></svg></div>
+        <div class="meta-title" id="metaTitle">—</div>
+        <div class="meta-sub" data-i18n="meta_sub">Build de chasseur</div>
+        <div class="meta-row"><span class="key" data-i18n="meta_rarity">Rareté max</span><span class="val" id="metaRarity">—</span></div>
+        <div class="meta-row"><span class="key" data-i18n="meta_weapon_type">Arme</span><span class="val" id="metaWeapon">—</span></div>
+        <div class="meta-row"><span class="key" data-i18n="meta_pieces">Pièces</span><span class="val" id="metaPieces">0/7</span></div>
+      </div>
+
+      <div class="panel-card">
+        <h3 data-i18n="set_bonuses_title">Bonus de série</h3>
+        <div class="set-bonuses" id="setBonuses"></div>
+      </div>
+    </aside>
+
+    <!-- ===== CENTER ===== -->
+    <section class="builder-section">
+      <div class="builder-header">
+        <div>
+          <h2 data-i18n="builder_title">Équipement</h2>
+          <p class="sub" data-i18n="builder_sub">Cliquez sur un emplacement pour ouvrir la liste.</p>
+        </div>
+      </div>
+      <div class="slot-grid" id="slotGrid"></div>
+    </section>
+
+    <!-- ===== RIGHT RAIL ===== -->
+    <aside class="side-right">
+      <div class="panel-card">
+        <h3 data-i18n="stats_title">État</h3>
+        <div class="stats-grid">
+          <div class="stat-block">
+            <div class="label"><svg><use href="#ico-defense"/></svg><span data-i18n="stat_defense">Défense</span></div>
+            <div class="value" id="statDefense">0</div>
+          </div>
+          <div class="stat-block">
+            <div class="label"><svg><use href="#ico-deco"/></svg><span data-i18n="stat_slots">Emplac.</span></div>
+            <div class="value" id="statSlots">0</div>
+          </div>
+        </div>
+        <div class="res-grid" id="resGrid"></div>
+      </div>
+
+      <div class="panel-card">
+        <h3>
+          <span data-i18n="skills_title">Talents de l'équipement</span>
+          <span class="count" id="skillCount">0</span>
+        </h3>
+        <div class="active-skills-list" id="activeSkills"></div>
+      </div>
+    </aside>
+
+  </main>
+
+  <div class="mockup-footer">
+    <span data-i18n="mockup_note">Maquette interactive — données d'exemple. Thème Guild par défaut (inspiré du menu in-game), thèmes Parchment & Verdant dispos.</span>
+  </div>
+</div>
+
+<!-- ==================== MODAL ==================== -->
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header">
+      <div class="modal-title-icon" id="modalIconHost"><svg><use href="#ico-head"/></svg></div>
+      <div class="modal-titles">
+        <h2 id="modalTitle">—</h2>
+        <span class="modal-subtitle" id="modalCount">—</span>
+      </div>
+      <button class="icon-btn" id="modalClose" aria-label="Close"><svg><use href="#ico-close"/></svg></button>
+    </div>
+
+    <div class="modal-toolbar">
+      <div class="search-field">
+        <svg><use href="#ico-search"/></svg>
+        <input type="text" id="searchInput" placeholder="..." />
+      </div>
+      <div class="select-field">
+        <span class="label" data-i18n="filter_skill">Talent</span>
+        <select id="skillFilter"><option value="">—</option></select>
+      </div>
+      <div class="select-field">
+        <span class="label" data-i18n="sort_by">Tri</span>
+        <select id="sortBy">
+          <option value="defense_desc" data-i18n="sort_def_desc"></option>
+          <option value="defense_asc" data-i18n="sort_def_asc"></option>
+          <option value="name_asc" data-i18n="sort_name"></option>
+          <option value="slots_desc" data-i18n="sort_slots"></option>
+          <option value="rarity_desc" data-i18n="sort_rarity"></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="active-filters" id="activeFilters"></div>
+
+    <div class="modal-body">
+      <div class="item-list" id="itemList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================
+   I18N
+   ========================================================== */
+const I18N = {
+  fr: {
+    tagline: "Monster Hunter Wilds",
+    build_label: "Build",
+    default_build_name: "Chasseur d'Arkveld",
+    btn_save: "Enregistrer",
+    btn_share: "Partager",
+    builder_title: "Équipement",
+    builder_sub: "Cliquez sur un emplacement pour ouvrir la liste.",
+    stats_title: "État",
+    stat_defense: "Défense",
+    stat_slots: "Emplac.",
+    skills_title: "Talents de l'équipement",
+    no_skills: "Équipez des pièces pour activer des talents.",
+    filter_skill: "Talent",
+    sort_by: "Tri",
+    sort_def_desc: "Défense ↓",
+    sort_def_asc: "Défense ↑",
+    sort_name: "Nom (A → Z)",
+    sort_slots: "Emplacements",
+    sort_rarity: "Rareté",
+    mockup_note: "Maquette interactive — données d'exemple. Thème Guild par défaut (inspiré du menu in-game), thèmes Parchment & Verdant dispos.",
+    search_placeholder: "Rechercher un item ou un talent…",
+    no_results_title: "Rien trouvé",
+    no_results_sub: "Essaie d'élargir ta recherche ou de retirer un filtre.",
+    slot_weapon: "Arme", slot_head: "Tête", slot_chest: "Torse",
+    slot_arms: "Bras", slot_waist: "Taille", slot_legs: "Jambes", slot_talisman: "Talisman",
+    select_empty: "Cliquer pour choisir",
+    pick_title_weapon: "Choisir une arme",
+    pick_title_head: "Choisir un casque",
+    pick_title_chest: "Choisir un plastron",
+    pick_title_arms: "Choisir des brassards",
+    pick_title_waist: "Choisir une ceinture",
+    pick_title_legs: "Choisir des jambières",
+    pick_title_talisman: "Choisir un talisman",
+    items_available: "options",
+    def: "Déf", attack: "Atq", affinity: "Affinité", rarity_short: "Rar",
+    res_fire: "Feu", res_water: "Eau", res_thunder: "Foudre", res_ice: "Glace", res_dragon: "Dragon",
+    meta_sub: "Build de chasseur",
+    meta_rarity: "Rareté max",
+    meta_weapon_type: "Arme",
+    meta_pieces: "Pièces",
+    set_bonuses_title: "Bonus de série",
+    set_none: "Aucun bonus actif.",
+    set_active: "activé",
+    clear_slot: "Retirer",
+    deco_slot: "Emplacement",
+    deco_size: "taille",
+    deco_empty: "Emplacement vide",
+  },
+  en: {
+    tagline: "Monster Hunter Wilds",
+    build_label: "Build",
+    default_build_name: "Arkveld Hunter",
+    btn_save: "Save",
+    btn_share: "Share",
+    builder_title: "Equipment",
+    builder_sub: "Click a slot to browse gear.",
+    stats_title: "Status",
+    stat_defense: "Defense",
+    stat_slots: "Slots",
+    skills_title: "Equipment skills",
+    no_skills: "Equip gear to activate skills.",
+    filter_skill: "Skill",
+    sort_by: "Sort",
+    sort_def_desc: "Defense ↓",
+    sort_def_asc: "Defense ↑",
+    sort_name: "Name (A → Z)",
+    sort_slots: "Slots",
+    sort_rarity: "Rarity",
+    mockup_note: "Interactive mockup — sample data. Guild theme by default (inspired by in-game menu), Parchment & Verdant themes available.",
+    search_placeholder: "Search item or skill…",
+    no_results_title: "Nothing found",
+    no_results_sub: "Try broadening your search or removing a filter.",
+    slot_weapon: "Weapon", slot_head: "Head", slot_chest: "Chest",
+    slot_arms: "Arms", slot_waist: "Waist", slot_legs: "Legs", slot_talisman: "Charm",
+    select_empty: "Click to select",
+    pick_title_weapon: "Choose a weapon",
+    pick_title_head: "Choose head gear",
+    pick_title_chest: "Choose chest gear",
+    pick_title_arms: "Choose arm gear",
+    pick_title_waist: "Choose waist gear",
+    pick_title_legs: "Choose leg gear",
+    pick_title_talisman: "Choose a charm",
+    items_available: "items",
+    def: "Def", attack: "Atk", affinity: "Affinity", rarity_short: "Rar",
+    res_fire: "Fire", res_water: "Water", res_thunder: "Thunder", res_ice: "Ice", res_dragon: "Dragon",
+    meta_sub: "Hunter loadout",
+    meta_rarity: "Max rarity",
+    meta_weapon_type: "Weapon",
+    meta_pieces: "Pieces",
+    set_bonuses_title: "Set bonuses",
+    set_none: "No active bonus.",
+    set_active: "active",
+    clear_slot: "Remove",
+    deco_slot: "Slot",
+    deco_size: "size",
+    deco_empty: "Empty slot",
+  }
+};
+
+/* ==========================================================
+   SKILLS — ajoute une catégorie pour colorer le badge
+   cat: 'atk' | 'def' | 'util'
+   ========================================================== */
+const SKILLS = {
+  attack_boost:    { fr: "Attaque",              en: "Attack Boost",      max: 5, cat: 'atk' },
+  crit_eye:        { fr: "Œil critique",          en: "Critical Eye",      max: 5, cat: 'atk' },
+  crit_boost:      { fr: "Boost critique",        en: "Critical Boost",    max: 5, cat: 'atk' },
+  weakness_exploit:{ fr: "Opportuniste",          en: "Weakness Exploit",  max: 5, cat: 'atk' },
+  agitator:        { fr: "Provocateur",           en: "Agitator",          max: 5, cat: 'atk' },
+  max_might:       { fr: "Puissance maximum",     en: "Maximum Might",     max: 3, cat: 'atk' },
+  burst:           { fr: "Rafale",                en: "Burst",             max: 5, cat: 'atk' },
+  flayer:          { fr: "Entaille",              en: "Flayer",            max: 5, cat: 'atk' },
+  offensive_guard: { fr: "Garde offensive",       en: "Offensive Guard",   max: 3, cat: 'def' },
+  guard:           { fr: "Garde",                 en: "Guard",             max: 5, cat: 'def' },
+  earplugs:        { fr: "Bouchons d'oreilles",   en: "Earplugs",          max: 5, cat: 'def' },
+  evade_window:    { fr: "Fenêtre d'esquive",     en: "Evade Window",      max: 5, cat: 'util' },
+  defense_boost:   { fr: "Défense",               en: "Defense Boost",     max: 7, cat: 'def' },
+  divine_blessing: { fr: "Grâce divine",          en: "Divine Blessing",   max: 5, cat: 'def' },
+  recovery_up:     { fr: "Récupération",          en: "Recovery Up",       max: 3, cat: 'def' },
+  health_boost:    { fr: "Santé",                 en: "Health Boost",      max: 3, cat: 'def' },
+  constitution:    { fr: "Constitution",          en: "Constitution",      max: 5, cat: 'util' },
+  partbreaker:     { fr: "Briseur",               en: "Partbreaker",       max: 3, cat: 'atk' },
+  handicraft:      { fr: "Artisanat",             en: "Handicraft",        max: 5, cat: 'util' },
+  focus:           { fr: "Concentration",         en: "Focus",             max: 3, cat: 'util' },
+  stamina_surge:   { fr: "Régénération d'endurance", en: "Stamina Surge",  max: 3, cat: 'util' },
+};
+
+const SET_BONUSES = {
+  Rathalos:    { fr: "Sanguinaire (2/4)",             en: "Bloodlust (2/4)",           minPieces: 2 },
+  Arkveld:     { fr: "Maître de l'arène (2/4)",       en: "Arena Master (2/4)",        minPieces: 2 },
+  "Rey Dau":   { fr: "Attisé par la foudre (2/4)",    en: "Lightning-Touched (2/4)",   minPieces: 2 },
+  "Gore Magala": { fr: "Frénésie (2/4)",              en: "Frenzy (2/4)",              minPieces: 2 },
+  Chatacabra:  { fr: "Gardien amphibien (3/5)",       en: "Amphibian Guard (3/5)",     minPieces: 3 },
+  Doshaguma:   { fr: "Cri du troupeau (3/5)",         en: "Pack Leader's Roar (3/5)",  minPieces: 3 },
+};
+
+/* ==========================================================
+   EQUIPMENT
+   ========================================================== */
+const EQUIPMENT = {
+  weapon: [
+    { id:'w1', fr:"Épée cuirassée I",       en:"Buster Sword I",        type:"Great Sword",   rarity:2, attack:180, affinity:0,  slots:[1,0,0], skills:[] },
+    { id:'w2', fr:"Katana flamboyant I",    en:"Flamberge Katana",      type:"Long Sword",    rarity:4, attack:150, affinity:5,  slots:[2,1,0], skills:[{id:'attack_boost',lvl:1}] },
+    { id:'w3', fr:"Marteau Rathalos I",     en:"Rathalos Hammer I",     type:"Hammer",        rarity:5, attack:170, affinity:0,  slots:[2,0,0], skills:[{id:'agitator',lvl:1}] },
+    { id:'w4', fr:"Lance Arkveld I",        en:"Arkveld Lance I",       type:"Lance",         rarity:6, attack:160, affinity:10, slots:[3,1,1], skills:[{id:'weakness_exploit',lvl:1}] },
+    { id:'w5', fr:"Arc Rey Dau I",          en:"Rey Dau Bow I",         type:"Bow",           rarity:5, attack:145, affinity:15, slots:[2,2,0], skills:[{id:'crit_eye',lvl:1}] },
+    { id:'w6', fr:"Épée & Bouclier Gore I", en:"Gore Sword & Shield I", type:"SnS",           rarity:5, attack:140, affinity:10, slots:[1,1,1], skills:[{id:'burst',lvl:1}] },
+    { id:'w7', fr:"Lame-charge Arkveld I",  en:"Arkveld Charge Blade I",type:"Charge Blade",  rarity:7, attack:170, affinity:15, slots:[3,2,1], skills:[{id:'weakness_exploit',lvl:2}] },
+    { id:'w8', fr:"Volto-hache chrono",     en:"Chrono Volt-Axe",       type:"Switch Axe",    rarity:8, attack:210, affinity:19, slots:[3,2,1], skills:[{id:'max_might',lvl:1},{id:'attack_boost',lvl:1}] },
+  ],
+  head: [
+    { id:'h1', fr:"Heaume Chatacabra α",  en:"Chatacabra Helm α",  origin:"Chatacabra", rarity:3, defense:44, slots:[1,0,0], skills:[{id:'defense_boost',lvl:1},{id:'partbreaker',lvl:1}], res:{fire:-1,water:2,thunder:0,ice:0,dragon:0} },
+    { id:'h2', fr:"Heaume Quematrice α",  en:"Quematrice Helm α",  origin:"Quematrice", rarity:3, defense:46, slots:[1,1,0], skills:[{id:'attack_boost',lvl:1}], res:{fire:2,water:-2,thunder:0,ice:0,dragon:0} },
+    { id:'h3', fr:"Heaume Doshaguma α",   en:"Doshaguma Helm α",   origin:"Doshaguma",  rarity:4, defense:50, slots:[2,0,0], skills:[{id:'agitator',lvl:1}], res:{fire:0,water:0,thunder:-1,ice:1,dragon:0} },
+    { id:'h4', fr:"Heaume Rathalos α",    en:"Rathalos Helm α",    origin:"Rathalos",   rarity:6, defense:54, slots:[2,1,0], skills:[{id:'attack_boost',lvl:2},{id:'crit_eye',lvl:1}], res:{fire:3,water:-2,thunder:1,ice:-2,dragon:-1} },
+    { id:'h5', fr:"Heaume Rey Dau α",     en:"Rey Dau Helm α",     origin:"Rey Dau",    rarity:5, defense:52, slots:[2,2,0], skills:[{id:'crit_eye',lvl:1},{id:'weakness_exploit',lvl:1}], res:{fire:-1,water:-1,thunder:3,ice:0,dragon:-1} },
+    { id:'h6', fr:"Cache-œil Roi-dragon α", en:"Dragon King Eyepatch α", origin:"Arkveld", rarity:8, defense:56, slots:[3,1,0], skills:[{id:'weakness_exploit',lvl:2}], res:{fire:0,water:0,thunder:0,ice:0,dragon:-2} },
+    { id:'h7', fr:"Heaume Gore Magala α", en:"Gore Magala Helm α", origin:"Gore Magala",rarity:7, defense:52, slots:[2,1,1], skills:[{id:'max_might',lvl:1},{id:'crit_boost',lvl:1}], res:{fire:-1,water:0,thunder:-1,ice:0,dragon:2} },
+    { id:'h8', fr:"Heaume Nu Udra α",     en:"Nu Udra Helm α",     origin:"Nu Udra",    rarity:5, defense:50, slots:[2,0,0], skills:[{id:'burst',lvl:1},{id:'evade_window',lvl:1}], res:{fire:3,water:0,thunder:0,ice:-2,dragon:0} },
+  ],
+  chest: [
+    { id:'c1', fr:"Plastron Chatacabra α",   en:"Chatacabra Mail α",   origin:"Chatacabra",  rarity:3, defense:44, slots:[1,0,0], skills:[{id:'defense_boost',lvl:1}], res:{fire:-1,water:2,thunder:0,ice:0,dragon:0} },
+    { id:'c2', fr:"Plastron Lala Barina α",  en:"Lala Barina Mail α",  origin:"Lala Barina", rarity:4, defense:48, slots:[2,1,0], skills:[{id:'recovery_up',lvl:1},{id:'divine_blessing',lvl:1}], res:{fire:0,water:-2,thunder:0,ice:2,dragon:0} },
+    { id:'c3', fr:"Plastron Doshaguma α",    en:"Doshaguma Mail α",    origin:"Doshaguma",   rarity:4, defense:52, slots:[2,0,0], skills:[{id:'agitator',lvl:2}], res:{fire:0,water:0,thunder:-1,ice:1,dragon:0} },
+    { id:'c4', fr:"Plastron Rathian α",      en:"Rathian Mail α",      origin:"Rathian",     rarity:6, defense:54, slots:[2,1,0], skills:[{id:'recovery_up',lvl:2}], res:{fire:2,water:-2,thunder:1,ice:-2,dragon:-1} },
+    { id:'c5', fr:"Cotte As de la Guilde α", en:"Guild Ace Mail α",    origin:"Arkveld",     rarity:8, defense:58, slots:[3,1,0], skills:[{id:'weakness_exploit',lvl:1},{id:'flayer',lvl:1}], res:{fire:2,water:2,thunder:2,ice:2,dragon:2} },
+    { id:'c6', fr:"Plastron Uth Duna α",     en:"Uth Duna Mail α",     origin:"Uth Duna",    rarity:5, defense:52, slots:[2,2,0], skills:[{id:'constitution',lvl:2}], res:{fire:-2,water:3,thunder:0,ice:0,dragon:0} },
+    { id:'c7', fr:"Plastron Gore Magala α",  en:"Gore Magala Mail α",  origin:"Gore Magala", rarity:7, defense:54, slots:[2,1,1], skills:[{id:'max_might',lvl:1},{id:'burst',lvl:1}], res:{fire:-1,water:0,thunder:-1,ice:0,dragon:2} },
+    { id:'c8', fr:"Plastron Rathalos α",     en:"Rathalos Mail α",     origin:"Rathalos",    rarity:6, defense:56, slots:[2,1,0], skills:[{id:'attack_boost',lvl:2}], res:{fire:3,water:-2,thunder:1,ice:-2,dragon:-1} },
+  ],
+  arms: [
+    { id:'a1', fr:"Brassards Chatacabra α", en:"Chatacabra Braces α", origin:"Chatacabra", rarity:3, defense:42, slots:[1,1,0], skills:[{id:'partbreaker',lvl:1}], res:{fire:-1,water:2,thunder:0,ice:0,dragon:0} },
+    { id:'a2', fr:"Brassards Quematrice α", en:"Quematrice Braces α", origin:"Quematrice", rarity:3, defense:46, slots:[1,0,0], skills:[{id:'attack_boost',lvl:1},{id:'focus',lvl:1}], res:{fire:2,water:-2,thunder:0,ice:0,dragon:0} },
+    { id:'a3', fr:"Brassards Rathalos α",   en:"Rathalos Braces α",   origin:"Rathalos",   rarity:6, defense:52, slots:[2,1,0], skills:[{id:'attack_boost',lvl:1},{id:'crit_boost',lvl:1}], res:{fire:3,water:-2,thunder:1,ice:-2,dragon:-1} },
+    { id:'a4', fr:"Brassards Rey Dau α",    en:"Rey Dau Braces α",    origin:"Rey Dau",    rarity:5, defense:50, slots:[2,2,0], skills:[{id:'crit_eye',lvl:2}], res:{fire:-1,water:-1,thunder:3,ice:0,dragon:-1} },
+    { id:'a5', fr:"Avant-bras As de la Guilde α", en:"Guild Ace Vambraces α", origin:"Arkveld", rarity:8, defense:56, slots:[3,1,0], skills:[{id:'flayer',lvl:2}], res:{fire:2,water:2,thunder:2,ice:2,dragon:2} },
+    { id:'a6', fr:"Brassards Gore Magala α", en:"Gore Magala Braces α", origin:"Gore Magala", rarity:7, defense:52, slots:[2,1,1], skills:[{id:'crit_boost',lvl:1},{id:'agitator',lvl:1}], res:{fire:-1,water:0,thunder:-1,ice:0,dragon:2} },
+    { id:'a7', fr:"Brassards Nu Udra α",    en:"Nu Udra Braces α",    origin:"Nu Udra",    rarity:5, defense:48, slots:[2,1,0], skills:[{id:'evade_window',lvl:2}], res:{fire:3,water:0,thunder:0,ice:-2,dragon:0} },
+  ],
+  waist: [
+    { id:'wa1', fr:"Ceinture Chatacabra α", en:"Chatacabra Coil α", origin:"Chatacabra", rarity:3, defense:44, slots:[1,0,0], skills:[{id:'defense_boost',lvl:1}], res:{fire:-1,water:2,thunder:0,ice:0,dragon:0} },
+    { id:'wa2', fr:"Ceinture Doshaguma α",  en:"Doshaguma Coil α",  origin:"Doshaguma",  rarity:4, defense:50, slots:[2,0,0], skills:[{id:'agitator',lvl:1},{id:'earplugs',lvl:1}], res:{fire:0,water:0,thunder:-1,ice:1,dragon:0} },
+    { id:'wa3', fr:"Ceinture Rathalos α",   en:"Rathalos Coil α",   origin:"Rathalos",   rarity:6, defense:52, slots:[2,1,0], skills:[{id:'attack_boost',lvl:1}], res:{fire:3,water:-2,thunder:1,ice:-2,dragon:-1} },
+    { id:'wa4', fr:"Tassette As de la Guilde α", en:"Guild Ace Coil α", origin:"Arkveld", rarity:8, defense:56, slots:[3,2,0], skills:[{id:'weakness_exploit',lvl:1},{id:'attack_boost',lvl:1}], res:{fire:2,water:2,thunder:2,ice:2,dragon:2} },
+    { id:'wa5', fr:"Ceinture Uth Duna α",   en:"Uth Duna Coil α",   origin:"Uth Duna",   rarity:5, defense:50, slots:[2,2,0], skills:[{id:'stamina_surge',lvl:2}], res:{fire:-2,water:3,thunder:0,ice:0,dragon:0} },
+    { id:'wa6', fr:"Ceinture Gore Magala α", en:"Gore Magala Coil α", origin:"Gore Magala", rarity:7, defense:52, slots:[2,1,1], skills:[{id:'max_might',lvl:1}], res:{fire:-1,water:0,thunder:-1,ice:0,dragon:2} },
+  ],
+  legs: [
+    { id:'l1', fr:"Jambières Chatacabra α", en:"Chatacabra Greaves α", origin:"Chatacabra", rarity:3, defense:42, slots:[1,0,0], skills:[{id:'defense_boost',lvl:1}], res:{fire:-1,water:2,thunder:0,ice:0,dragon:0} },
+    { id:'l2', fr:"Jambières Doshaguma α",  en:"Doshaguma Greaves α",  origin:"Doshaguma",  rarity:4, defense:48, slots:[2,0,0], skills:[{id:'agitator',lvl:1},{id:'constitution',lvl:1}], res:{fire:0,water:0,thunder:-1,ice:1,dragon:0} },
+    { id:'l3', fr:"Jambières Rathalos α",   en:"Rathalos Greaves α",   origin:"Rathalos",   rarity:6, defense:52, slots:[2,1,0], skills:[{id:'attack_boost',lvl:1}], res:{fire:3,water:-2,thunder:1,ice:-2,dragon:-1} },
+    { id:'l4', fr:"Jambières Rey Dau α",    en:"Rey Dau Greaves α",    origin:"Rey Dau",    rarity:5, defense:50, slots:[2,1,0], skills:[{id:'weakness_exploit',lvl:1},{id:'crit_eye',lvl:1}], res:{fire:-1,water:-1,thunder:3,ice:0,dragon:-1} },
+    { id:'l5', fr:"Bottes As de la Guilde α", en:"Guild Ace Boots α", origin:"Arkveld", rarity:8, defense:60, slots:[2,2,2], skills:[{id:'agitator',lvl:1},{id:'flayer',lvl:1}], res:{fire:2,water:2,thunder:2,ice:2,dragon:2} },
+    { id:'l6', fr:"Jambières Gore Magala α", en:"Gore Magala Greaves α", origin:"Gore Magala", rarity:7, defense:52, slots:[2,1,1], skills:[{id:'crit_boost',lvl:1},{id:'burst',lvl:1}], res:{fire:-1,water:0,thunder:-1,ice:0,dragon:2} },
+    { id:'l7', fr:"Jambières Nu Udra α",    en:"Nu Udra Greaves α",    origin:"Nu Udra",    rarity:5, defense:48, slots:[2,2,0], skills:[{id:'evade_window',lvl:1},{id:'stamina_surge',lvl:1}], res:{fire:3,water:0,thunder:0,ice:-2,dragon:0} },
+  ],
+  talisman: [
+    { id:'t1', fr:"Charme d'attaque III",      en:"Attack Charm III",       rarity:5, defense:0, slots:[0,0,0], skills:[{id:'attack_boost',lvl:3}], res:{fire:0,water:0,thunder:0,ice:0,dragon:0} },
+    { id:'t2', fr:"Charme d'opportuniste II",  en:"Weakness Exploit Charm II", rarity:5, defense:0, slots:[0,0,0], skills:[{id:'weakness_exploit',lvl:2}], res:{fire:0,water:0,thunder:0,ice:0,dragon:0} },
+    { id:'t3', fr:"Charme critique II",        en:"Critical Eye Charm II",  rarity:5, defense:0, slots:[0,0,0], skills:[{id:'crit_eye',lvl:2}], res:{fire:0,water:0,thunder:0,ice:0,dragon:0} },
+    { id:'t4', fr:"Talisman de fureur",        en:"Fury Charm",             rarity:6, defense:0, slots:[0,0,0], skills:[{id:'agitator',lvl:3}], res:{fire:0,water:0,thunder:0,ice:0,dragon:0} },
+    { id:'t5', fr:"Charme de défense IV",      en:"Defense Charm IV",       rarity:4, defense:12, slots:[0,0,0], skills:[{id:'defense_boost',lvl:3}], res:{fire:0,water:0,thunder:0,ice:0,dragon:0} },
+    { id:'t6', fr:"Charme de récupération II", en:"Recovery Charm II",      rarity:4, defense:0, slots:[0,0,0], skills:[{id:'recovery_up',lvl:2}], res:{fire:0,water:0,thunder:0,ice:0,dragon:0} },
+  ],
+};
+
+/* ==========================================================
+   STATE
+   ========================================================== */
+const SLOT_ORDER = ['weapon', 'head', 'chest', 'arms', 'waist', 'legs', 'talisman'];
+const RES_KEYS = ['fire', 'water', 'thunder', 'ice', 'dragon'];
+
+/* ==========================================================
+   PNG ICONS — Monster Hunter Wiki assets (CC-BY-NC usage)
+   Le reste des slots retombe sur le sprite SVG ci-dessus.
+   ========================================================== */
+const SLOT_PNG = {
+  head:  'icons/helmet.png',
+  chest: 'icons/chestplate.png',
+  legs:  'icons/leggings.png',
+};
+const WEAPON_PNG = {
+  'Great Sword':   'icons/great-sword.png',
+  'Long Sword':    'icons/long-sword.png',
+  'Dual Blades':   'icons/dual-blades.png',
+  'Lance':         'icons/lance.png',
+  'Gunlance':      'icons/gunlance.png',
+  'Hunting Horn':  'icons/hunting-horn.png',
+  'Insect Glaive': 'icons/insect-glaive.png',
+  'Bow':           'icons/bow.png',
+  'Light Bowgun':  'icons/light-bowgun.png',
+  'Kinsect (Cutting)': 'icons/kinsect-cutting.png',
+  'Kinsect (Impact)':  'icons/kinsect-impact.png',
+};
+function getSlotIconHTML(slot, item) {
+  // Weapon: icon matches weapon type if available
+  if (slot === 'weapon' && item?.type && WEAPON_PNG[item.type]) {
+    return `<img src="${WEAPON_PNG[item.type]}" alt="${item.type}" />`;
+  }
+  // Armor slot PNG
+  if (SLOT_PNG[slot]) {
+    return `<img src="${SLOT_PNG[slot]}" alt="${slot}" />`;
+  }
+  // Fallback to SVG sprite (arms, waist, talisman, weapons we don't have yet)
+  return `<svg><use href="#ico-${slot === 'weapon' ? 'weapon' : slot}"/></svg>`;
+}
+
+const state = {
+  lang: 'fr',
+  theme: 'guild',
+  equipped: { weapon:null, head:null, chest:null, arms:null, waist:null, legs:null, talisman:null },
+  modal: { open:false, slot:null, search:'', skillFilter:'', sort:'defense_desc' }
+};
+
+/* ==========================================================
+   HELPERS
+   ========================================================== */
+const t = (key) => I18N[state.lang][key] ?? key;
+const itemName = (item) => item[state.lang] ?? item.en;
+const skillName = (id) => SKILLS[id]?.[state.lang] ?? id;
+const skillCat = (id) => SKILLS[id]?.cat ?? 'gen';
+const rarityColor = (r) => `var(--rarity-${Math.max(1, Math.min(8, r))})`;
+const getItem = (slot) => {
+  const id = state.equipped[slot];
+  if (!id) return null;
+  return EQUIPMENT[slot].find(x => x.id === id) ?? null;
+};
+const skillDotIcon = (cat) => cat === 'atk' ? 'ico-skill-atk' : cat === 'def' ? 'ico-skill-def' : 'ico-skill-util';
+
+/* ==========================================================
+   RENDER — slots
+   ========================================================== */
+function renderSlots() {
+  const grid = document.getElementById('slotGrid');
+  grid.innerHTML = SLOT_ORDER.map(slot => {
+    const item = getItem(slot);
+    const emptyClass = item ? '' : 'slot--empty';
+    const name = item ? itemName(item) : t('select_empty');
+    const rarity = item ? rarityColor(item.rarity) : 'var(--border-strong)';
+    const rarityTag = item ? `<span class="slot-rarity-tag" style="--rarity:${rarity}">${t('rarity_short')} ${item.rarity}</span>` : '';
+
+    const stats = item ? renderSlotStats(slot, item) : '';
+    const skills = item ? renderSlotSkills(item) : '';
+    const decos = renderDecoSlots(item ? item.slots : [0,0,0]);
+    const origin = item?.origin ? `<div class="slot-origin">${item.origin}</div>` : '';
+
+    const iconHtml = getSlotIconHTML(slot, item);
+    const iconIsImg = iconHtml.startsWith('<img');
+    return `
+      <button class="slot slot--${slot} ${emptyClass}" data-slot="${slot}" style="--rarity:${rarity}" aria-label="${t('slot_' + slot)}">
+        <div class="slot-icon ${iconIsImg ? 'slot-icon--img' : ''}">${iconHtml}</div>
+        <div class="slot-content">
+          <div class="slot-header">
+            <span class="slot-label">${t('slot_' + slot)}</span>
+            ${rarityTag}
+          </div>
+          <div class="slot-name-wrap">
+            <div class="slot-item-name" title="${name}">${name}</div>
+            ${origin}
+          </div>
+          <div class="slot-body-row">
+            ${stats}
+          </div>
+          <div class="slot-body-row">
+            <div class="slot-skills-wrap">${skills || ''}</div>
+            ${decos}
+          </div>
+        </div>
+        ${item ? `<span class="slot-clear-btn" data-clear="${slot}" title="${t('clear_slot') || 'Clear'}"><svg><use href="#ico-close"/></svg></span>` : ''}
+      </button>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.slot').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const clearTarget = e.target.closest('[data-clear]');
+      if (clearTarget) {
+        e.stopPropagation();
+        state.equipped[clearTarget.dataset.clear] = null;
+        renderAll();
+        return;
+      }
+      openPicker(btn.dataset.slot);
+    });
+  });
+}
+
+function renderSlotStats(slot, item) {
+  if (slot === 'weapon') {
+    const affChip = item.affinity ? `<span class="stat-res ${item.affinity>0?'pos':'neg'}">${item.affinity>0?'+':''}${item.affinity}%</span>` : '';
+    return `
+      <div class="slot-stats">
+        <span class="stat-chip def">${t('attack')} ${item.attack}</span>
+        <span class="stat-chip">${item.type}</span>
+        ${affChip}
+      </div>
+    `;
+  }
+  const resHtml = RES_KEYS.map(k => {
+    const v = item.res?.[k] ?? 0;
+    if (v === 0) return '';
+    return `<span class="stat-res ${k} ${v>0?'pos':'neg'}" title="${t('res_' + k)}"><svg><use href="#ico-${k}"/></svg>${v>0?'+':''}${v}</span>`;
+  }).join('');
+  return `
+    <div class="slot-stats">
+      <span class="stat-chip def"><svg><use href="#ico-defense"/></svg>${item.defense}</span>
+      ${resHtml}
+    </div>
+  `;
+}
+
+function renderSlotSkills(item) {
+  if (!item.skills || item.skills.length === 0) return '';
+  return `
+    <div class="slot-skills">
+      ${item.skills.map(s => {
+        const cat = skillCat(s.id);
+        const altName = state.lang === 'fr' ? SKILLS[s.id]?.en : SKILLS[s.id]?.fr;
+        return `<span class="skill-pill" title="${skillName(s.id)}${altName ? ' / ' + altName : ''} — Niv. ${s.lvl}">
+          <span class="skill-dot cat-${cat}"><svg><use href="#${skillDotIcon(cat)}"/></svg></span>
+          ${skillName(s.id)}<span class="lvl">+${s.lvl}</span>
+        </span>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+function renderDecoSlots(slots) {
+  return `
+    <div class="slot-decos">
+      ${slots.map(lvl => lvl > 0
+        ? `<span class="deco-slot lvl-${lvl}" title="${t('deco_slot')} ${t('deco_size')} ${lvl}"><span class="lvl">${lvl}</span></span>`
+        : `<span class="deco-slot empty" title="${t('deco_empty')}"><span class="lvl">·</span></span>`
+      ).join('')}
+    </div>
+  `;
+}
+
+/* ==========================================================
+   RENDER — side panels
+   ========================================================== */
+function renderSidePanels() {
+  let totalDef = 0;
+  const totalRes = { fire:0, water:0, thunder:0, ice:0, dragon:0 };
+  const skillAgg = {};
+  let freeSlots = 0;
+  let maxRarity = 0;
+  let pieces = 0;
+  let weaponType = '—';
+  const originCount = {};
+
+  SLOT_ORDER.forEach(slot => {
+    const item = getItem(slot);
+    if (!item) return;
+    pieces++;
+    totalDef += item.defense || 0;
+    maxRarity = Math.max(maxRarity, item.rarity || 0);
+    RES_KEYS.forEach(k => { totalRes[k] += item.res?.[k] ?? 0; });
+    item.slots?.forEach(s => { if (s > 0) freeSlots++; });
+    (item.skills || []).forEach(s => {
+      skillAgg[s.id] = (skillAgg[s.id] || 0) + s.lvl;
+    });
+    if (slot === 'weapon') weaponType = item.type;
+    if (item.origin) originCount[item.origin] = (originCount[item.origin] || 0) + 1;
+  });
+
+  document.getElementById('metaTitle').textContent =
+    document.getElementById('buildName').value || t('default_build_name');
+  document.getElementById('metaRarity').textContent = maxRarity ? 'R' + maxRarity : '—';
+  document.getElementById('metaWeapon').textContent = weaponType;
+  document.getElementById('metaPieces').textContent = pieces + '/7';
+
+  const setsEl = document.getElementById('setBonuses');
+  const activeBonuses = [];
+  Object.entries(SET_BONUSES).forEach(([setKey, bonus]) => {
+    const count = originCount[setKey] || 0;
+    if (count >= bonus.minPieces) activeBonuses.push({ setKey, bonus, count });
+  });
+
+  if (activeBonuses.length === 0) {
+    setsEl.innerHTML = `<div class="empty-line">${t('set_none')}</div>`;
+  } else {
+    setsEl.innerHTML = activeBonuses.map(b => `
+      <div class="set-bonus">
+        <span class="set-name">${b.bonus[state.lang]}</span>
+        <span class="set-count">${b.setKey} · ${t('set_active')}</span>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('statDefense').textContent = totalDef;
+  document.getElementById('statSlots').textContent = freeSlots;
+
+  document.getElementById('resGrid').innerHTML = RES_KEYS.map(k => {
+    const v = totalRes[k];
+    const cls = v > 0 ? 'pos' : v < 0 ? 'neg' : '';
+    return `
+      <div class="res-cell el-${k} ${cls}" title="${t('res_' + k)}">
+        <span class="el-icon"><svg><use href="#ico-${k}"/></svg></span>
+        <span class="val">${v>0?'+':''}${v}</span>
+        <span class="res-label">${t('res_' + k)}</span>
+      </div>
+    `;
+  }).join('');
+
+  const container = document.getElementById('activeSkills');
+  const skillList = Object.entries(skillAgg).sort((a, b) => b[1] - a[1]);
+  document.getElementById('skillCount').textContent = skillList.length;
+
+  if (skillList.length === 0) {
+    container.innerHTML = `<div class="active-skills-empty">${t('no_skills')}</div>`;
+    return;
+  }
+
+  container.innerHTML = skillList.map(([id, lvl]) => {
+    const max = SKILLS[id]?.max ?? 5;
+    const displayLvl = Math.min(lvl, max);
+    const maxed = displayLvl >= max;
+    const cat = skillCat(id);
+    const pips = Array.from({length: max}, (_, i) => `<span class="pip ${i < displayLvl ? 'active' : ''}"></span>`).join('');
+    return `
+      <div class="active-skill ${maxed ? 'maxed' : ''}">
+        <span class="skill-badge cat-${cat}"><svg><use href="#${skillDotIcon(cat)}"/></svg></span>
+        <span class="name">${skillName(id)}</span>
+        <span class="level-bar">
+          ${pips}
+          <span class="lvl-num">${displayLvl}</span>
+        </span>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ==========================================================
+   MODAL
+   ========================================================== */
+function openPicker(slot) {
+  state.modal.open = true;
+  state.modal.slot = slot;
+  state.modal.search = '';
+  state.modal.skillFilter = '';
+  state.modal.sort = 'defense_desc';
+
+  const backdrop = document.getElementById('modalBackdrop');
+  backdrop.hidden = false;
+  requestAnimationFrame(() => backdrop.classList.add('open'));
+
+  document.getElementById('modalTitle').textContent = t('pick_title_' + slot);
+  // Modal icon: use PNG if available for this slot, else SVG
+  const modalIconEl = document.getElementById('modalIconHost');
+  const currentItem = getItem(slot);
+  modalIconEl.innerHTML = getSlotIconHTML(slot, currentItem);
+  modalIconEl.classList.toggle('is-img', modalIconEl.querySelector('img') !== null);
+
+  const unique = new Set();
+  EQUIPMENT[slot].forEach(it => (it.skills||[]).forEach(s => unique.add(s.id)));
+  const sel = document.getElementById('skillFilter');
+  sel.innerHTML = `<option value="">—</option>` +
+    [...unique].sort((a, b) => skillName(a).localeCompare(skillName(b)))
+      .map(id => `<option value="${id}">${skillName(id)}</option>`).join('');
+
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchInput').placeholder = t('search_placeholder');
+  document.getElementById('sortBy').value = 'defense_desc';
+
+  renderItemList();
+  setTimeout(() => document.getElementById('searchInput').focus(), 120);
+}
+
+function closePicker() {
+  const backdrop = document.getElementById('modalBackdrop');
+  backdrop.classList.remove('open');
+  state.modal.open = false;
+  setTimeout(() => { backdrop.hidden = true; }, 260);
+}
+
+function renderItemList() {
+  const { slot, search, skillFilter, sort } = state.modal;
+  let items = [...(EQUIPMENT[slot] || [])];
+
+  if (search) {
+    const q = search.toLowerCase();
+    items = items.filter(it =>
+      it.fr.toLowerCase().includes(q) ||
+      it.en.toLowerCase().includes(q) ||
+      (it.origin && it.origin.toLowerCase().includes(q)) ||
+      (it.skills||[]).some(s => {
+        const sn = SKILLS[s.id];
+        return sn && (sn.fr.toLowerCase().includes(q) || sn.en.toLowerCase().includes(q));
+      })
+    );
+  }
+
+  if (skillFilter) {
+    items = items.filter(it => (it.skills||[]).some(s => s.id === skillFilter));
+  }
+
+  switch (sort) {
+    case 'defense_desc': items.sort((a, b) => (b.defense ?? b.attack ?? 0) - (a.defense ?? a.attack ?? 0)); break;
+    case 'defense_asc':  items.sort((a, b) => (a.defense ?? a.attack ?? 0) - (b.defense ?? b.attack ?? 0)); break;
+    case 'name_asc':     items.sort((a, b) => itemName(a).localeCompare(itemName(b))); break;
+    case 'slots_desc':   items.sort((a, b) => (b.slots||[]).reduce((s,v)=>s+v,0) - (a.slots||[]).reduce((s,v)=>s+v,0)); break;
+    case 'rarity_desc':  items.sort((a, b) => (b.rarity||0) - (a.rarity||0)); break;
+  }
+
+  document.getElementById('modalCount').textContent = `${items.length} ${t('items_available')}`;
+
+  const af = document.getElementById('activeFilters');
+  if (skillFilter) {
+    af.innerHTML = `<span class="filter-chip">${t('filter_skill')}: ${skillName(skillFilter)}<button data-clear-skill aria-label="Clear">×</button></span>`;
+    af.querySelector('[data-clear-skill]').addEventListener('click', () => {
+      state.modal.skillFilter = '';
+      document.getElementById('skillFilter').value = '';
+      renderItemList();
+    });
+  } else {
+    af.innerHTML = '';
+  }
+
+  const list = document.getElementById('itemList');
+  if (items.length === 0) {
+    list.innerHTML = `<div class="empty-state"><div class="ico">✧</div><div class="title">${t('no_results_title')}</div><div class="sub">${t('no_results_sub')}</div></div>`;
+    return;
+  }
+
+  const currentId = state.equipped[slot];
+  list.innerHTML = items.map(it => {
+    const isCurrent = it.id === currentId;
+    const main = itemName(it);
+    const altLang = state.lang === 'fr' ? it.en : it.fr;
+    const rarity = rarityColor(it.rarity);
+    const metaHtml = slot === 'weapon'
+      ? `<span>${t('attack')} ${it.attack}</span><span>${it.type}</span>${it.affinity?`<span>${it.affinity>0?'+':''}${it.affinity}%</span>`:''}`
+      : `<span>${t('def')} ${it.defense}</span>` +
+        RES_KEYS.map(k => {
+          const v = it.res?.[k] ?? 0;
+          if (v === 0) return '';
+          return `<span class="stat-res ${k} ${v>0?'pos':'neg'}"><svg><use href="#ico-${k}"/></svg>${v>0?'+':''}${v}</span>`;
+        }).join('');
+    const skillsHtml = (it.skills||[]).map(s => {
+      const cat = skillCat(s.id);
+      return `<span class="skill-pill"><span class="skill-dot cat-${cat}"><svg><use href="#${skillDotIcon(cat)}"/></svg></span>${skillName(s.id)}<span class="lvl">+${s.lvl}</span></span>`;
+    }).join('');
+    const decoHtml = renderDecoSlots(it.slots || [0,0,0]);
+    const currentBadge = isCurrent ? `<span class="check-badge"><svg><use href="#ico-check"/></svg></span>` : '';
+
+    const thumbHtml = getSlotIconHTML(slot, it);
+    return `
+      <button class="item-card ${isCurrent?'current':''}" data-pick="${it.id}" style="--rarity:${rarity}">
+        ${currentBadge}
+        <div class="item-head">
+          <div class="item-thumb">${thumbHtml}</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span class="rarity-pill" style="--rarity:${rarity}">R${it.rarity}</span>
+              <div class="item-name">${main}</div>
+            </div>
+            <div class="item-name-alt">${altLang}</div>
+          </div>
+        </div>
+        <div class="item-meta">${metaHtml}</div>
+        ${skillsHtml ? `<div class="item-skills">${skillsHtml}</div>` : ''}
+        ${decoHtml}
+      </button>
+    `;
+  }).join('');
+
+  list.querySelectorAll('.item-card').forEach(card => {
+    card.addEventListener('click', () => {
+      state.equipped[state.modal.slot] = card.dataset.pick;
+      closePicker();
+      renderAll();
+    });
+  });
+}
+
+/* ==========================================================
+   EVENTS
+   ========================================================== */
+document.getElementById('modalClose').addEventListener('click', closePicker);
+document.getElementById('modalBackdrop').addEventListener('click', (e) => {
+  if (e.target.id === 'modalBackdrop') closePicker();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && state.modal.open) closePicker();
+});
+
+document.getElementById('searchInput').addEventListener('input', (e) => { state.modal.search = e.target.value; renderItemList(); });
+document.getElementById('skillFilter').addEventListener('change', (e) => { state.modal.skillFilter = e.target.value; renderItemList(); });
+document.getElementById('sortBy').addEventListener('change', (e) => { state.modal.sort = e.target.value; renderItemList(); });
+
+document.querySelectorAll('[data-theme-set]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const theme = btn.dataset.themeSet;
+    state.theme = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+    document.querySelectorAll('[data-theme-set]').forEach(b => {
+      b.setAttribute('aria-pressed', b.dataset.themeSet === theme ? 'true' : 'false');
+    });
+  });
+});
+
+document.querySelectorAll('[data-lang-set]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.langSet;
+    state.lang = lang;
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-lang-set]').forEach(b => {
+      b.setAttribute('aria-pressed', b.dataset.langSet === lang ? 'true' : 'false');
+    });
+    applyI18n();
+    renderAll();
+    if (state.modal.open) renderItemList();
+  });
+});
+
+document.getElementById('buildName').addEventListener('input', () => {
+  document.getElementById('metaTitle').textContent =
+    document.getElementById('buildName').value || t('default_build_name');
+});
+
+function applyI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const val = t(key);
+    if (el.querySelector('svg')) {
+      const svg = el.querySelector('svg').outerHTML;
+      el.innerHTML = svg + ' ' + val;
+    } else {
+      el.textContent = val;
+    }
+  });
+  document.querySelectorAll('#sortBy option').forEach(opt => {
+    const k = opt.dataset.i18n;
+    if (k) opt.textContent = t(k);
+  });
+  document.getElementById('buildName').placeholder = t('default_build_name');
+  document.getElementById('searchInput').placeholder = t('search_placeholder');
+}
+
+function renderAll() { renderSlots(); renderSidePanels(); }
+
+/* ==========================================================
+   INIT — build inspiré du screenshot (As de la Guilde)
+   ========================================================== */
+state.equipped = {
+  weapon: 'w8', head: 'h6', chest: 'c5', arms: 'a5', waist: 'wa4', legs: 'l5', talisman: 't4',
+};
+document.getElementById('buildName').value = "As de la Guilde";
+
+applyI18n();
+renderAll();
+</script>
+
+</body>
+</html>

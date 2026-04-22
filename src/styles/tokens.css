@@ -1,0 +1,62 @@
+/* ===== DESIGN TOKENS (indépendants du thème) ===== */
+:root {
+  --font-ui:  'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-num: 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
+
+  /* Tailles de texte */
+  --text-xs:  11px;
+  --text-sm:  13px;
+  --text-md:  15px;
+  --text-lg:  17px;
+  --text-xl:  21px;
+  --text-2xl: 28px;
+  --text-3xl: 38px;
+
+  /* Graisses — minimum 500 partout */
+  --w-regular: 500;
+  --w-medium:  600;
+  --w-bold:    700;
+  --w-heavy:   800;
+
+  /* Espacements */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-7:  28px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* Rayons de bordure */
+  --r-sm:   3px;
+  --r-md:   6px;
+  --r-lg:   10px;
+  --r-xl:   14px;
+  --r-full: 999px;
+
+  /* Animations */
+  --ease:     cubic-bezier(.22, .9, .28, 1);
+  --dur-fast: 140ms;
+  --dur-med:  260ms;
+  --dur-slow: 420ms;
+
+  /* Couleurs d'éléments — calées sur MH Wilds */
+  --el-fire:    #e06a5a;
+  --el-water:   #5aa5d8;
+  --el-thunder: #e0d050;
+  --el-ice:     #90d8dc;
+  --el-dragon:  #c566b0;
+
+  /* Raretés R1–R8 */
+  --rarity-1: #b8b0a2;
+  --rarity-2: #c5b78b;
+  --rarity-3: #90b076;
+  --rarity-4: #5ea5ab;
+  --rarity-5: #7b71b8;
+  --rarity-6: #b36a86;
+  --rarity-7: #d48a3c;
+  --rarity-8: #e8aa3d;
+}
