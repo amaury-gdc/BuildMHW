@@ -2,7 +2,9 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useLang } from '../../contexts/LangContext';
 import { useBuild } from '../../contexts/BuildContext';
 import { useT } from '../../hooks/useT';
-import type { Theme, Lang } from '../../types';
+import type { Theme, Lang, Slot } from '../../types';
+
+const SLOTS: Slot[] = ['weapon', 'head', 'chest', 'arms', 'waist', 'legs', 'talisman'];
 
 const THEMES: { value: Theme; label: string }[] = [
   { value: 'guild',     label: 'Guild'     },
@@ -16,10 +18,12 @@ const LANGS: { value: Lang; label: string }[] = [
 ];
 
 export default function Header() {
-  const { theme, setTheme }       = useTheme();
-  const { lang, setLang }         = useLang();
-  const { buildName, setBuildName } = useBuild();
+  const { theme, setTheme }         = useTheme();
+  const { lang, setLang }           = useLang();
+  const { build, buildName, setBuildName } = useBuild();
   const t = useT();
+
+  const equippedCount = SLOTS.filter(s => build[s] !== null).length;
 
   return (
     <header className="header">
@@ -45,6 +49,12 @@ export default function Header() {
           onChange={e => setBuildName(e.target.value)}
           aria-label={t('build_label')}
         />
+      </div>
+
+      {/* Compteur de pièces */}
+      <div className="header-piece-count" aria-label={`${equippedCount} / 7 ${t('pieces_equipped')}`}>
+        <span className="piece-count-num">{equippedCount}<span className="piece-count-total">/7</span></span>
+        <span className="piece-count-label">{t('pieces_equipped')}</span>
       </div>
 
       <div className="header-spacer" />

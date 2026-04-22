@@ -179,6 +179,35 @@ p { margin: 0; }
 .header-spacer { flex: 1; }
 .header-actions { display: flex; align-items: center; gap: var(--sp-2); }
 
+.header-piece-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+  padding: 0 var(--sp-3);
+  border-left: 1px solid color-mix(in srgb, var(--text-faint) 30%, transparent);
+}
+.piece-count-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: var(--text-xl);
+  color: var(--accent);
+}
+.piece-count-total {
+  font-size: var(--text-sm);
+  color: var(--text-faint);
+  font-weight: 600;
+  margin-left: 1px;
+}
+.piece-count-label {
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 /* Segmented toggle (thème / langue) */
 .segmented {
   display: inline-flex;
