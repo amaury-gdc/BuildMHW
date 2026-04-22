@@ -11,15 +11,12 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('guild');
 
-  const setTheme = (t: Theme) => {
-    setThemeState(t);
-    document.documentElement.setAttribute('data-theme', t);
-  };
+  const setTheme = (t: Theme) => setThemeState(t);
 
-  // S'assure que l'attribut HTML est positionné au montage
+  // Synchronise l'attribut HTML à chaque changement de thème (y compris au montage)
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', 'guild');
-  }, []);
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

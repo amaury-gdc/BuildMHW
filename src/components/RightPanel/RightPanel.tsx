@@ -1,17 +1,10 @@
 import { useBuildStats } from '../../hooks/useBuildStats';
 import { useLang } from '../../contexts/LangContext';
 import { SKILLS } from '../../data/skills';
+import { EL_LABEL } from '../../data/elements';
 import ElementIcon from '../icons/ElementIcon';
 import { RES_KEYS } from '../../types';
-import type { Lang, Element, SkillCat } from '../../types';
-
-const EL_LABEL: Record<Element, { fr: string; en: string }> = {
-  fire:    { fr: 'Feu',    en: 'Fire'    },
-  water:   { fr: 'Eau',    en: 'Water'   },
-  thunder: { fr: 'Foudre', en: 'Thunder' },
-  ice:     { fr: 'Glace',  en: 'Ice'     },
-  dragon:  { fr: 'Dragon', en: 'Dragon'  },
-};
+import type { Lang, SkillCat } from '../../types';
 
 function StatBig({ value, label, cls }: { value: string; label: string; cls?: string }) {
   return (

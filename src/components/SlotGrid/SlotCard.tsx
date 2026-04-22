@@ -102,8 +102,8 @@ export default function SlotCard({ slot, onOpenPicker, onOpenDeco }: Props) {
                 const hasPlaced  = !!placedId;
                 const canPlace   = size > 0;
                 return (
-                  <div
-                    key={i}
+                  // eslint-disable-next-line react/no-array-index-key -- tableau fixe de 3 slots, jamais réordonné
+                  <div key={i}
                     role={canPlace ? 'button' : undefined}
                     tabIndex={canPlace ? 0 : undefined}
                     className={`deco-slot${size === 0 ? ' deco-empty' : ` deco-${size}`}${hasPlaced ? ' deco-filled' : ''}${canPlace ? ' deco-clickable' : ''}`}
@@ -111,7 +111,7 @@ export default function SlotCard({ slot, onOpenPicker, onOpenDeco }: Props) {
                       !canPlace
                         ? t('deco_empty')
                         : hasPlaced
-                          ? (lang === 'fr' ? 'Modifier la décoration' : 'Change decoration')
+                          ? t('change_decoration')
                           : `${t('deco_slot')} ${t('deco_size')} ${size}`
                     }
                     onClick={e => handleDecoClick(e, idx, size)}

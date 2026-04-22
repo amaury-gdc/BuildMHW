@@ -2,6 +2,7 @@ import type { Item, Lang } from '../../types';
 import { SKILLS } from '../../data/skills';
 import { rarityColor } from '../../utils/rarity';
 import { RES_KEYS } from '../../types';
+import { EL_LABEL } from '../../data/elements';
 
 interface Props {
   item: Item;
@@ -11,14 +12,6 @@ interface Props {
   pinned?: boolean;
   onClose?: () => void;
 }
-
-const EL_LABEL: Record<string, { fr: string; en: string }> = {
-  fire:    { fr: 'Feu',    en: 'Fire'    },
-  water:   { fr: 'Eau',    en: 'Water'   },
-  thunder: { fr: 'Foudre', en: 'Thunder' },
-  ice:     { fr: 'Glace',  en: 'Ice'     },
-  dragon:  { fr: 'Dragon', en: 'Dragon'  },
-};
 
 const TW = 288;
 const TH = 320;
@@ -107,6 +100,7 @@ export default function ItemTooltip({ item, x, y, lang, pinned, onClose }: Props
           <span className="item-tooltip-stat-label">{lang === 'fr' ? 'Emplacements' : 'Slots'}</span>
           <div className="item-tooltip-slots-pips">
             {item.slots.filter(s => s > 0).map((s, i) => (
+              // eslint-disable-next-line react/no-array-index-key
               <span key={i} className={`picker-slot-pip picker-slot-pip--${s}`}>{s}</span>
             ))}
           </div>

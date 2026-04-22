@@ -69,7 +69,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
     setPinnedTooltips([]);
   }, [slot]);
 
-  const items = slot ? EQUIPMENT[slot] : [];
+  const items = useMemo(() => (slot ? EQUIPMENT[slot] : []), [slot]);
 
   const isWeapon = slot === 'weapon';
   const defaultSort: SortKey = isWeapon ? 'atk_desc' : 'def_desc';
@@ -78,7 +78,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
     const q = search.toLowerCase().trim();
     const sk = skillFilter;
 
-    let result = items.filter(item => {
+    const result = items.filter(item => {
       const name = (lang === 'fr' ? item.fr : item.en).toLowerCase();
       const matchName  = !q || name.includes(q) || (item.origin ?? '').toLowerCase().includes(q);
       const matchSkill = !sk || (item.skills ?? []).some(s => s.id === sk);
@@ -125,8 +125,8 @@ export default function PickerDialog({ slot, onClose }: Props) {
 
   const sortOptions: { value: SortKey; label: string }[] = isWeapon
     ? [
-        { value: 'atk_desc', label: t('sort_def_desc').replace('Défense', t('attack')).replace('Defense', t('attack')) },
-        { value: 'atk_asc',  label: t('sort_def_asc').replace('Défense', t('attack')).replace('Defense', t('attack')) },
+        { value: 'atk_desc', label: t('sort_atk_desc') },
+        { value: 'atk_asc',  label: t('sort_atk_asc') },
         { value: 'rarity',   label: t('sort_rarity') },
         { value: 'name',     label: t('sort_name') },
         { value: 'slots',    label: t('sort_slots') },
@@ -198,7 +198,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
             autoFocus
           />
           {search && (
-            <button className="picker-search-clear" onClick={() => setSearch('')} aria-label="Effacer">×</button>
+            <button className="picker-search-clear" onClick={() => setSearch('')} aria-label={t('clear')}>×</button>
           )}
         </div>
 
@@ -224,7 +224,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
                 value={skillFilter}
                 onChange={e => setSkillFilter(e.target.value)}
               >
-                <option value="">— {lang === 'fr' ? 'Tous' : 'All'} —</option>
+                <option value="">— {t('all')} —</option>
                 {skillOptions.map(([id, name]) => (
                   <option key={id} value={id}>{name}</option>
                 ))}
@@ -239,7 +239,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
         {/* Option "Aucun" */}
         {currentId && (
           <button className="picker-item picker-item--none" onClick={handleClear}>
-            <span className="picker-none-label">— {lang === 'fr' ? 'Retirer l\'équipement' : 'Remove equipment'} —</span>
+            <span className="picker-none-label">— {t('remove_equipment')} —</span>
           </button>
         )}
 
@@ -300,6 +300,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
                   )}
                   <span className="picker-item-slots">
                     {item.slots.filter(s => s > 0).map((s, i) => (
+                      // eslint-disable-next-line react/no-array-index-key
                       <span key={i} className={`picker-slot-pip picker-slot-pip--${s}`}>{s}</span>
                     ))}
                   </span>
