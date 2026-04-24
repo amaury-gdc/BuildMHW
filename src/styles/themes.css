@@ -1,11 +1,11 @@
 /* ===== THÈME : GUILD (défaut — dark warm brown, accents or/crème) ===== */
 [data-theme="guild"] {
-  --bg:           #1a140b;
-  --bg-alt:       #231b10;
-  --bg-vignette:  radial-gradient(ellipse at top, #2a2012 0%, #130e07 100%);
-  --surface:      rgba(38, 29, 17, 0.92);
-  --surface-2:    rgba(52, 40, 22, 0.88);
-  --surface-elev: rgba(62, 48, 26, 0.95);
+  --bg:           #0e0a05;
+  --bg-alt:       #160f07;
+  --bg-vignette:  radial-gradient(ellipse at top, #1a1208 0%, #080503 100%);
+  --surface:      rgba(30, 22, 12, 0.95);
+  --surface-2:    rgba(42, 32, 18, 0.92);
+  --surface-elev: rgba(50, 38, 20, 0.97);
   --border:       rgba(196, 160, 94, 0.28);
   --border-strong:rgba(212, 170, 80, 0.55);
   --border-gold:  #c29d4f;
