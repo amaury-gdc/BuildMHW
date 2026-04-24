@@ -1070,6 +1070,21 @@ p { margin: 0; }
 .item-tooltip-el--ice     { color: var(--el-ice) !important; }
 .item-tooltip-el--dragon  { color: var(--el-dragon) !important; }
 
+/* ===== COULEURS ÉLÉMENTAIRES — right panel stats ===== */
+.rp-el--fire    { color: var(--el-fire)    !important; }
+.rp-el--water   { color: var(--el-water)   !important; }
+.rp-el--thunder { color: var(--el-thunder) !important; }
+.rp-el--ice     { color: var(--el-ice)     !important; }
+.rp-el--dragon  { color: var(--el-dragon)  !important; }
+
+/* ===== PICKER — fond opaque derrière la modale ===== */
+.picker-dialog.p-dialog-mask,
+.p-dialog-mask.p-component-overlay {
+  background: rgba(0, 0, 0, 0.72) !important;
+  backdrop-filter: blur(3px) !important;
+  -webkit-backdrop-filter: blur(3px) !important;
+}
+
 /* ===== RESPONSIVE MOBILE ===== */
 
 /* ≤ 900px : cacher les boutons Save/Share non fonctionnels */

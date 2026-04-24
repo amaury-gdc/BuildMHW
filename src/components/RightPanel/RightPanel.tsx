@@ -57,14 +57,14 @@ function Section({ cat, title, children }: { cat: SkillCat | 'bonus'; title: str
 }
 
 export default function RightPanel() {
-  const { defense, resistances, attack, affinity, freeSlots, skills, setBonuses } = useBuildStats();
+  const { defense, resistances, attack, affinity, element, elementDmg, elementHidden, freeSlots, skills, setBonuses } = useBuildStats();
   const { lang } = useLang();
 
   const atkSkills  = skills.filter(s => SKILLS[s.id]?.cat === 'atk');
   const defSkills  = skills.filter(s => SKILLS[s.id]?.cat === 'def');
   const utilSkills = skills.filter(s => SKILLS[s.id]?.cat === 'util');
 
-  const hasOffense = attack > 0 || atkSkills.length > 0;
+  const hasOffense = attack > 0 || atkSkills.length > 0 || (element !== null && elementDmg > 0);
   const hasDefense = defense > 0 || defSkills.length > 0;
   const isEmpty    = !hasOffense && !hasDefense && utilSkills.length === 0;
 
@@ -88,10 +88,17 @@ export default function RightPanel() {
       {/* ── OFFENSIF ── */}
       {hasOffense && (
         <Section cat="atk" title={lang === 'fr' ? 'Offensif' : 'Offensive'}>
-          {(attack > 0 || affinity !== 0) && (
+          {(attack > 0 || affinity !== 0 || (element && elementDmg > 0)) && (
             <div className="rp-stat-row">
               {attack > 0 && (
                 <StatBig value={String(attack)} label={lang === 'fr' ? 'Attaque' : 'Attack'} />
+              )}
+              {element && elementDmg > 0 && (
+                <StatBig
+                  value={elementHidden ? `(${elementDmg})` : String(elementDmg)}
+                  label={EL_LABEL[element][lang]}
+                  cls={`rp-el--${element}`}
+                />
               )}
               {affinity !== 0 && (
                 <StatBig
