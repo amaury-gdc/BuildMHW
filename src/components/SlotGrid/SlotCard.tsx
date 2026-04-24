@@ -6,8 +6,16 @@ import { useT } from '../../hooks/useT';
 import { EQUIPMENT } from '../../data/equipment';
 import { SKILLS } from '../../data/skills';
 import SlotIcon from '../icons/SlotIcon';
+import ElementIcon from '../icons/ElementIcon';
 import { rarityColor } from '../../utils/rarity';
-import type { Slot } from '../../types';
+import type { Slot, Element } from '../../types';
+
+const STATUS_COLOR: Record<string, string> = {
+  poison:      'var(--el-dragon)',
+  paralysis:   'var(--el-thunder)',
+  sleep:       'var(--el-ice)',
+  blastblight: 'var(--el-fire)',
+};
 
 interface Props {
   slot: Slot;
@@ -90,6 +98,17 @@ export default function SlotCard({ slot, onOpenPicker, onOpenDeco }: Props) {
               {item.defense !== undefined && item.defense > 0 && (
                 <span className="stat-chip stat-def">
                   {t('def')} <span className="num">{item.defense}</span>
+                </span>
+              )}
+              {item.element && item.elementDmg !== undefined && (
+                <span className="stat-chip stat-chip--element">
+                  <ElementIcon element={item.element as Element} size={10} />
+                  <span className="num">{item.elementHidden ? `(${item.elementDmg})` : item.elementDmg}</span>
+                </span>
+              )}
+              {item.status && item.statusDmg !== undefined && (
+                <span className="stat-chip" style={{ color: STATUS_COLOR[item.status] }}>
+                  <span className="num">{item.statusDmg}</span>
                 </span>
               )}
             </div>

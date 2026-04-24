@@ -9,7 +9,15 @@ import { SKILLS } from '../../data/skills';
 import { rarityColor } from '../../utils/rarity';
 import SlotIcon from '../icons/SlotIcon';
 import ItemTooltip from './ItemTooltip';
-import type { Item, Slot } from '../../types';
+import ElementIcon from '../icons/ElementIcon';
+import type { Element, Item, Slot } from '../../types';
+
+const STATUS_COLOR: Record<string, string> = {
+  poison:      'var(--el-dragon)',
+  paralysis:   'var(--el-thunder)',
+  sleep:       'var(--el-ice)',
+  blastblight: 'var(--el-fire)',
+};
 
 type SortKey = 'def_desc' | 'def_asc' | 'atk_desc' | 'atk_asc' | 'rarity' | 'name' | 'slots';
 
@@ -326,6 +334,17 @@ export default function PickerDialog({ slot, onClose }: Props) {
                   )}
                   {item.defense !== undefined && item.defense > 0 && (
                     <span className="picker-stat stat-val-def">{t('def')} <b className="num">{item.defense}</b></span>
+                  )}
+                  {item.element && item.elementDmg !== undefined && (
+                    <span className="picker-stat" style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                      <ElementIcon element={item.element as Element} size={10} />
+                      <b className="num">{item.elementHidden ? `(${item.elementDmg})` : item.elementDmg}</b>
+                    </span>
+                  )}
+                  {item.status && item.statusDmg !== undefined && (
+                    <span className="picker-stat" style={{ color: STATUS_COLOR[item.status] }}>
+                      <b className="num">{item.statusDmg}</b>
+                    </span>
                   )}
                   <span className="picker-item-slots">
                     {item.slots.filter(s => s > 0).map((s, i) => (

@@ -1,7 +1,8 @@
 export type Lang = 'fr' | 'en';
 export type Theme = 'guild' | 'parchment' | 'verdant' | 'abyss';
 export type Slot = 'weapon' | 'head' | 'chest' | 'arms' | 'waist' | 'legs' | 'talisman';
-export type Element = 'fire' | 'water' | 'thunder' | 'ice' | 'dragon';
+export type Element     = 'fire' | 'water' | 'thunder' | 'ice' | 'dragon';
+export type WeaponStatus = 'poison' | 'paralysis' | 'sleep' | 'blastblight';
 export type SkillCat = 'atk' | 'def' | 'util';
 
 export interface Skill {
@@ -29,6 +30,11 @@ export interface Item {
   affinity?: number;
   defense?: number;
   res?: Partial<Record<Element, number>>;
+  element?: Element;
+  elementDmg?: number;
+  elementHidden?: boolean;
+  status?: WeaponStatus;
+  statusDmg?: number;
   slots: number[];
   skills?: SkillOnItem[];
 }

@@ -111,6 +111,11 @@ function serializeItem(item) {
     const r = Object.entries(item.res).map(([k, v]) => `${k}:${v}`).join(',');
     out += `, res:{${r}}`;
   }
+  if (item.element    != null) out += `, element:'${item.element}'`;
+  if (item.elementDmg != null) out += `, elementDmg:${item.elementDmg}`;
+  if (item.elementHidden)      out += `, elementHidden:true`;
+  if (item.status    != null)  out += `, status:'${item.status}'`;
+  if (item.statusDmg != null)  out += `, statusDmg:${item.statusDmg}`;
   out += `, slots:[${item.slots.join(',')}]`;
   if (item.skills?.length) {
     const sk = item.skills.map(s => `{id:'${s.id}',lvl:${s.lvl}}`).join(',');
@@ -156,16 +161,23 @@ function makeEquipmentFile(
     const fr   = weaponFr.get(id) ?? en;
     const type = KIND_TO_TYPE[en.kind];
     if (!type) continue;
+    const elSpec  = (en.specials ?? []).find(s => s.kind === 'element');
+    const stSpec  = (en.specials ?? []).find(s => s.kind === 'status');
     weapons.push(serializeItem({
-      id:       `w${id}`,
-      fr:       fr.name,
-      en:       en.name,
+      id:             `w${id}`,
+      fr:             fr.name,
+      en:             en.name,
       type,
-      rarity:   en.rarity ?? 1,
-      attack:   en.damage?.raw ?? 0,
-      affinity: en.affinity ?? 0,
-      slots:    normalizeSlots(en.slots),
-      skills:   (en.skills ?? []).map(s => ({ id: String(s.skill.id), lvl: s.level })),
+      rarity:         en.rarity ?? 1,
+      attack:         en.damage?.raw ?? 0,
+      affinity:       en.affinity ?? 0,
+      element:        elSpec?.element,
+      elementDmg:     elSpec?.damage?.display,
+      elementHidden:  elSpec?.hidden || undefined,
+      status:         stSpec?.status,
+      statusDmg:      stSpec?.damage?.display,
+      slots:          normalizeSlots(en.slots),
+      skills:         (en.skills ?? []).map(s => ({ id: String(s.skill.id), lvl: s.level })),
     }));
   }
 
