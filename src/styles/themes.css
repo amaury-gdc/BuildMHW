@@ -102,6 +102,38 @@
   --gold-line:  linear-gradient(90deg, transparent, rgba(106,128,80,.5), transparent);
 }
 
+/* ===== THÈME : ABYSS (très sombre — fond quasi-noir, accent argent froid) ===== */
+[data-theme="abyss"] {
+  --bg:           #07070a;
+  --bg-alt:       #0d0d12;
+  --bg-vignette:  radial-gradient(ellipse at top, #10101a 0%, #040407 100%);
+  --surface:      rgba(14, 14, 20, 0.96);
+  --surface-2:    rgba(20, 20, 30, 0.92);
+  --surface-elev: rgba(18, 18, 26, 0.98);
+  --border:       rgba(140, 160, 220, 0.16);
+  --border-strong:rgba(140, 160, 220, 0.34);
+  --border-gold:  #6a7fba;
+
+  --text:         #dce4f8;
+  --text-muted:   #8898c8;
+  --text-faint:   #5a6888;
+
+  --accent:          #8ab4ff;
+  --accent-2:        #b8d0ff;
+  --accent-soft:     rgba(138, 180, 255, 0.14);
+  --accent-contrast: #07070a;
+
+  --ok:     #5dbe6e;
+  --warn:   #e8b653;
+  --danger: #e06a5a;
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.65);
+  --shadow-md: 0 10px 28px rgba(0,0,0,.8), 0 2px 5px rgba(0,0,0,.65);
+  --shadow-lg: 0 30px 80px rgba(0,0,0,.95), 0 4px 12px rgba(0,0,0,.7);
+  --inset-line: inset 0 1px 0 rgba(180,200,255,.07);
+  --gold-line:  linear-gradient(90deg, transparent, rgba(138,180,255,.35), transparent);
+}
+
 /* ===== ICÔNES PNG sur thèmes clairs (wiki MH conçu pour fonds sombres) ===== */
 [data-theme="parchment"] .slot-icon img,
 [data-theme="verdant"]   .slot-icon img {

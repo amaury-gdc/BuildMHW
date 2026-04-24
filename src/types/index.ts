@@ -1,5 +1,5 @@
 export type Lang = 'fr' | 'en';
-export type Theme = 'guild' | 'parchment' | 'verdant';
+export type Theme = 'guild' | 'parchment' | 'verdant' | 'abyss';
 export type Slot = 'weapon' | 'head' | 'chest' | 'arms' | 'waist' | 'legs' | 'talisman';
 export type Element = 'fire' | 'water' | 'thunder' | 'ice' | 'dragon';
 export type SkillCat = 'atk' | 'def' | 'util';

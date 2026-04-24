@@ -8,6 +8,7 @@ const SLOTS: Slot[] = ['weapon', 'head', 'chest', 'arms', 'waist', 'legs', 'tali
 
 const THEMES: { value: Theme; label: string }[] = [
   { value: 'guild',     label: 'Guild'     },
+  { value: 'abyss',    label: 'Abyss'     },
   { value: 'parchment', label: 'Parchment' },
   { value: 'verdant',   label: 'Verdant'   },
 ];
