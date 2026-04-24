@@ -15,13 +15,13 @@ const EMPTY_DECOS: EquippedBuild['decos'] = {
 };
 
 const DEFAULT_BUILD: EquippedBuild = {
-  weapon:   'w147',  // Volto-hache chrono (Charge Blade R8)
-  head:     'h582',  // Cache-œil Roi-dragon α (Arkveld R8)
-  chest:    'c22',   // Cotte As de la Guilde α
-  arms:     'a23',   // Avant-bras As de la Guilde α
-  waist:    'wa24',  // Tassette As de la Guilde α
-  legs:     'l25',   // Bottes As de la Guilde α
-  talisman: 't179',  // Talisman de fureur III
+  weapon:   null,
+  head:     null,
+  chest:    null,
+  arms:     null,
+  waist:    null,
+  legs:     null,
+  talisman: null,
   decos:    { ...EMPTY_DECOS },
 };
 
