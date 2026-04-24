@@ -104,12 +104,12 @@
 
 /* ===== THÈME : ABYSS (très sombre — fond quasi-noir, accent argent froid) ===== */
 [data-theme="abyss"] {
-  --bg:           #07070a;
-  --bg-alt:       #0d0d12;
-  --bg-vignette:  radial-gradient(ellipse at top, #10101a 0%, #040407 100%);
-  --surface:      rgba(14, 14, 20, 0.96);
-  --surface-2:    rgba(20, 20, 30, 0.92);
-  --surface-elev: rgba(18, 18, 26, 0.98);
+  --bg:           #030305;
+  --bg-alt:       #08080d;
+  --bg-vignette:  radial-gradient(ellipse at top, #0a0a12 0%, #020204 100%);
+  --surface:      rgba(28, 28, 40, 0.97);
+  --surface-2:    rgba(38, 38, 54, 0.94);
+  --surface-elev: rgba(34, 34, 48, 0.99);
   --border:       rgba(196, 160, 94, 0.22);
   --border-strong:rgba(212, 170, 80, 0.45);
   --border-gold:  #c29d4f;
