@@ -4,6 +4,7 @@ import { Dialog } from 'primereact/dialog';
 import { useBuild } from '../../contexts/BuildContext';
 import { useLang } from '../../contexts/LangContext';
 import { useT } from '../../hooks/useT';
+import { useWishlist } from '../../contexts/WishlistContext';
 import { EQUIPMENT } from '../../data/equipment';
 import { SKILLS } from '../../data/skills';
 import { rarityColor } from '../../utils/rarity';
@@ -19,23 +20,24 @@ const STATUS_COLOR: Record<string, string> = {
   blastblight: 'var(--el-fire)',
 };
 
-type SortKey = 'def_desc' | 'def_asc' | 'atk_desc' | 'atk_asc' | 'rarity' | 'name' | 'slots';
+type SortKey = 'def_desc' | 'def_asc' | 'atk_desc' | 'atk_asc' | 'rarity' | 'name' | 'slots' | 'coverage';
 
 interface Props {
   slot: Slot | null;
   onClose: () => void;
 }
 
-function sortItems(items: Item[], sort: SortKey): Item[] {
+function sortItems(items: Item[], sort: SortKey, coverageOf: (item: Item) => number): Item[] {
   return [...items].sort((a, b) => {
     switch (sort) {
-      case 'def_desc': return (b.defense ?? 0) - (a.defense ?? 0);
-      case 'def_asc':  return (a.defense ?? 0) - (b.defense ?? 0);
-      case 'atk_desc': return (b.attack  ?? 0) - (a.attack  ?? 0);
-      case 'atk_asc':  return (a.attack  ?? 0) - (b.attack  ?? 0);
-      case 'rarity':   return b.rarity - a.rarity;
-      case 'slots':    return b.slots.reduce((s, v) => s + v, 0) - a.slots.reduce((s, v) => s + v, 0);
-      case 'name':     return (a.fr < b.fr ? -1 : a.fr > b.fr ? 1 : 0);
+      case 'def_desc':  return (b.defense ?? 0) - (a.defense ?? 0);
+      case 'def_asc':   return (a.defense ?? 0) - (b.defense ?? 0);
+      case 'atk_desc':  return (b.attack  ?? 0) - (a.attack  ?? 0);
+      case 'atk_asc':   return (a.attack  ?? 0) - (b.attack  ?? 0);
+      case 'rarity':    return b.rarity - a.rarity;
+      case 'slots':     return b.slots.reduce((s, v) => s + v, 0) - a.slots.reduce((s, v) => s + v, 0);
+      case 'name':      return (a.fr < b.fr ? -1 : a.fr > b.fr ? 1 : 0);
+      case 'coverage':  return coverageOf(b) - coverageOf(a);
     }
   });
 }
@@ -44,6 +46,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
   const { build, equip } = useBuild();
   const { lang }         = useLang();
   const t                = useT();
+  const { targets }      = useWishlist();
 
   const [search,      setSearch]      = useState('');
   const [sort,        setSort]        = useState<SortKey>('def_desc');
@@ -94,6 +97,11 @@ export default function PickerDialog({ slot, onClose }: Props) {
     return Array.from(seen).sort();
   }, [isWeapon]);
 
+  const targetIds = useMemo(() => new Set(targets.map(t => t.id)), [targets]);
+
+  const coverageOf = (item: Item): number =>
+    (item.skills ?? []).filter(s => targetIds.has(s.id)).length;
+
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     const sk = skillFilter;
@@ -102,7 +110,6 @@ export default function PickerDialog({ slot, onClose }: Props) {
       const name = (lang === 'fr' ? item.fr : item.en).toLowerCase();
       const matchName  = !q || name.includes(q) || (item.origin ?? '').toLowerCase().includes(q);
       const matchSkill = !sk || (item.skills ?? []).some(s => s.id === sk);
-      // Recherche dans les noms de skills
       const matchSkillName = !q || (item.skills ?? []).some(s => {
         const sk = SKILLS[s.id];
         if (!sk) return false;
@@ -112,8 +119,9 @@ export default function PickerDialog({ slot, onClose }: Props) {
       return (matchName || matchSkillName) && matchSkill && matchType;
     });
 
-    return sortItems(result, sort || defaultSort);
-  }, [items, search, sort, skillFilter, lang, defaultSort, weaponType]);
+    return sortItems(result, sort || defaultSort, coverageOf);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items, search, sort, skillFilter, lang, defaultSort, weaponType, targetIds]);
 
   const skillOptions = useMemo(() => {
     const seen = new Map<string, string>();
@@ -144,6 +152,9 @@ export default function PickerDialog({ slot, onClose }: Props) {
 
   const title = slot ? t(`pick_title_${slot}` as Parameters<typeof t>[0]) : '';
 
+  const coverageOption: { value: SortKey; label: string } =
+    { value: 'coverage', label: t('sort_coverage') };
+
   const sortOptions: { value: SortKey; label: string }[] = isWeapon
     ? [
         { value: 'atk_desc', label: t('sort_atk_desc') },
@@ -151,6 +162,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
         { value: 'rarity',   label: t('sort_rarity') },
         { value: 'name',     label: t('sort_name') },
         { value: 'slots',    label: t('sort_slots') },
+        ...(targets.length > 0 ? [coverageOption] : []),
       ]
     : [
         { value: 'def_desc', label: t('sort_def_desc') },
@@ -158,6 +170,7 @@ export default function PickerDialog({ slot, onClose }: Props) {
         { value: 'rarity',   label: t('sort_rarity') },
         { value: 'name',     label: t('sort_name') },
         { value: 'slots',    label: t('sort_slots') },
+        ...(targets.length > 0 ? [coverageOption] : []),
       ];
 
   const tooltipPortal = createPortal(
@@ -307,6 +320,15 @@ export default function PickerDialog({ slot, onClose }: Props) {
                     </svg>
                   </div>
                 )}
+
+                {targets.length > 0 && (() => {
+                  const cov = coverageOf(item);
+                  return cov > 0 ? (
+                    <span className="picker-coverage-badge" aria-label={`${cov} objectif${cov > 1 ? 's' : ''}`}>
+                      ▸ {cov}
+                    </span>
+                  ) : null;
+                })()}
 
                 <div className="picker-item-head">
                   <div className="picker-item-thumb">

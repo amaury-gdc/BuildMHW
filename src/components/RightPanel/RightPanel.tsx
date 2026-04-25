@@ -6,6 +6,8 @@ import ElementIcon from '../icons/ElementIcon';
 import { RES_KEYS } from '../../types';
 import type { Lang, SkillCat } from '../../types';
 
+/* ── Helpers ─────────────────────────────────────────────── */
+
 function StatBig({ value, label, cls }: { value: string; label: string; cls?: string }) {
   return (
     <div className="rp-stat-big">
@@ -44,11 +46,15 @@ function SkillEntry({ id, lvl, lang }: { id: string; lvl: number; lang: Lang }) 
   );
 }
 
-function Section({ cat, title, children }: { cat: SkillCat | 'bonus'; title: string; children: React.ReactNode }) {
+function SectionShell({ type, title, children }: {
+  type: 'stats' | 'talents' | 'bonus';
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div className={`rp-section rp-section--${cat}`}>
-      <div className={`rp-section-title rp-section-title--${cat}`}>
-        <span className={`rp-section-dot rp-section-dot--${cat}`} />
+    <div className={`rp-section rp-section--${type}`}>
+      <div className={`rp-section-title rp-section-title--${type}`}>
+        <span className={`rp-section-dot rp-section-dot--${type}`} />
         {title}
       </div>
       {children}
@@ -56,17 +62,20 @@ function Section({ cat, title, children }: { cat: SkillCat | 'bonus'; title: str
   );
 }
 
+/* ── Main component ──────────────────────────────────────── */
+
 export default function RightPanel() {
-  const { defense, resistances, attack, affinity, element, elementDmg, elementHidden, freeSlots, skills, setBonuses } = useBuildStats();
+  const {
+    defense, resistances,
+    attack, affinity, element, elementDmg, elementHidden,
+    freeSlots, skills, setBonuses,
+  } = useBuildStats();
   const { lang } = useLang();
 
-  const atkSkills  = skills.filter(s => SKILLS[s.id]?.cat === 'atk');
-  const defSkills  = skills.filter(s => SKILLS[s.id]?.cat === 'def');
-  const utilSkills = skills.filter(s => SKILLS[s.id]?.cat === 'util');
-
-  const hasOffense = attack > 0 || atkSkills.length > 0 || (element !== null && elementDmg > 0);
-  const hasDefense = defense > 0 || defSkills.length > 0;
-  const isEmpty    = !hasOffense && !hasDefense && utilSkills.length === 0;
+  const hasWeaponStats = attack > 0 || affinity !== 0 || (element !== null && elementDmg > 0);
+  const hasArmorStats  = defense > 0;
+  const hasStats       = hasWeaponStats || hasArmorStats;
+  const isEmpty        = !hasStats && skills.length === 0;
 
   if (isEmpty) {
     return (
@@ -85,10 +94,12 @@ export default function RightPanel() {
   return (
     <aside className="right-panel">
 
-      {/* ── OFFENSIF ── */}
-      {hasOffense && (
-        <Section cat="atk" title={lang === 'fr' ? 'Offensif' : 'Offensive'}>
-          {(attack > 0 || affinity !== 0 || (element && elementDmg > 0)) && (
+      {/* ── STATS ── */}
+      {hasStats && (
+        <SectionShell type="stats" title={lang === 'fr' ? 'Statistiques' : 'Statistics'}>
+
+          {/* Arme : attaque, élément, affinité, critique */}
+          {hasWeaponStats && (
             <div className="rp-stat-row">
               {attack > 0 && (
                 <StatBig value={String(attack)} label={lang === 'fr' ? 'Attaque' : 'Attack'} />
@@ -109,69 +120,52 @@ export default function RightPanel() {
               )}
               {affinity !== 0 && (
                 <StatBig
-                  value={`${25 + Math.max(0, affinity) * 0.15 | 0}%`}
+                  value={`${25 + (Math.max(0, affinity) * 0.15 | 0)}%`}
                   label={lang === 'fr' ? 'Dégâts critique' : 'Crit damage'}
                   cls="rp-crit"
                 />
               )}
             </div>
           )}
-          {atkSkills.length > 0 && (
-            <div className="rp-skills">
-              {atkSkills.map(({ id, lvl }) => (
-                <SkillEntry key={id} id={id} lvl={lvl} lang={lang} />
-              ))}
-            </div>
-          )}
-        </Section>
-      )}
 
-      {/* ── DÉFENSIF ── */}
-      {hasDefense && (
-        <Section cat="def" title={lang === 'fr' ? 'Défensif' : 'Defensive'}>
-          <div className="rp-def-row">
-            {defense > 0 && (
+          {/* Armure : défense + résistances */}
+          {hasArmorStats && (
+            <div className="rp-def-row">
               <StatBig value={String(defense)} label={lang === 'fr' ? 'Défense' : 'Defense'} />
-            )}
-            <div className="rp-resistances">
-              {RES_KEYS.map(el => {
-                const val = resistances[el] ?? 0;
-                return (
-                  <div key={el} className={`rp-res-pill rp-res-pill--${el}`}>
-                    <ElementIcon element={el} size={10} />
-                    <span className="rp-res-el-label">{EL_LABEL[el][lang]}</span>
-                    <span className={`rp-res-val num ${val > 0 ? 'stat-pos' : val < 0 ? 'stat-neg' : 'rp-res-zero'}`}>
-                      {val > 0 ? '+' : ''}{val}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          {defSkills.length > 0 && (
-            <div className="rp-skills">
-              {defSkills.map(({ id, lvl }) => (
-                <SkillEntry key={id} id={id} lvl={lvl} lang={lang} />
-              ))}
+              <div className="rp-resistances">
+                {RES_KEYS.map(el => {
+                  const val = resistances[el] ?? 0;
+                  return (
+                    <div key={el} className={`rp-res-pill rp-res-pill--${el}`}>
+                      <ElementIcon element={el} size={10} />
+                      <span className="rp-res-el-label">{EL_LABEL[el][lang]}</span>
+                      <span className={`rp-res-val num ${val > 0 ? 'stat-pos' : val < 0 ? 'stat-neg' : 'rp-res-zero'}`}>
+                        {val > 0 ? '+' : ''}{val}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           )}
-        </Section>
+
+        </SectionShell>
       )}
 
-      {/* ── UTILITAIRES ── */}
-      {utilSkills.length > 0 && (
-        <Section cat="util" title={lang === 'fr' ? 'Utilitaires' : 'Utility'}>
+      {/* ── TALENTS ── */}
+      {skills.length > 0 && (
+        <SectionShell type="talents" title={lang === 'fr' ? 'Talents' : 'Skills'}>
           <div className="rp-skills">
-            {utilSkills.map(({ id, lvl }) => (
+            {skills.map(({ id, lvl }) => (
               <SkillEntry key={id} id={id} lvl={lvl} lang={lang} />
             ))}
           </div>
-        </Section>
+        </SectionShell>
       )}
 
       {/* ── BONUS DE SÉRIE ── */}
       {setBonuses.length > 0 && (
-        <Section cat="bonus" title={lang === 'fr' ? 'Bonus de série' : 'Set Bonuses'}>
+        <SectionShell type="bonus" title={lang === 'fr' ? 'Bonus de série' : 'Set Bonuses'}>
           <div className="rp-set-bonuses">
             {setBonuses.map(({ origin, count }) => (
               <div key={origin} className="rp-set-bonus">
@@ -186,7 +180,7 @@ export default function RightPanel() {
               </div>
             ))}
           </div>
-        </Section>
+        </SectionShell>
       )}
 
       {/* ── EMPLACEMENTS LIBRES ── */}

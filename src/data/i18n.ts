@@ -69,6 +69,7 @@ export const I18N = {
     deco_empty:         'Emplacement vide',
     pieces_equipped:    'pièces équipées',
     rarity_avg:         'Rar. moy.',
+    sort_coverage:      'Objectifs',
   },
   en: {
     tagline:            'Monster Hunter Wilds',
@@ -140,6 +141,7 @@ export const I18N = {
     deco_empty:         'Empty slot',
     pieces_equipped:    'pieces equipped',
     rarity_avg:         'Avg. Rar.',
+    sort_coverage:      'Goals',
   },
 } as const;
 
