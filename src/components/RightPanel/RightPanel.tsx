@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useBuildStats } from '../../hooks/useBuildStats';
 import { useLang } from '../../contexts/LangContext';
 import { SKILLS } from '../../data/skills';
@@ -46,18 +47,32 @@ function SkillEntry({ id, lvl, lang }: { id: string; lvl: number; lang: Lang }) 
   );
 }
 
-function SectionShell({ type, title, children }: {
+function SectionShell({ type, title, children, defaultOpen = true }: {
   type: 'stats' | 'talents' | 'bonus';
   title: string;
   children: React.ReactNode;
+  defaultOpen?: boolean;
 }) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <div className={`rp-section rp-section--${type}`}>
-      <div className={`rp-section-title rp-section-title--${type}`}>
+      <button
+        className={`rp-section-title rp-section-title--${type} rp-section-toggle`}
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+      >
         <span className={`rp-section-dot rp-section-dot--${type}`} />
-        {title}
-      </div>
-      {children}
+        <span className="rp-section-title-text">{title}</span>
+        <svg
+          className={`rp-section-chevron${open ? ' rp-section-chevron--open' : ''}`}
+          viewBox="0 0 12 12" fill="none" stroke="currentColor"
+          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <polyline points="2,4 6,8 10,4" />
+        </svg>
+      </button>
+      {open && children}
     </div>
   );
 }

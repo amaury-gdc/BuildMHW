@@ -899,6 +899,14 @@ p { margin: 0; }
 .rp-section-title--stats   { color: var(--accent); }
 .rp-section-title--talents { color: var(--text-muted); }
 
+/* Toggle button behaviour */
+.rp-section-toggle { width: 100%; text-align: left; cursor: pointer; transition: background var(--dur-fast) var(--ease); border-radius: 0; }
+.rp-section-toggle:hover { background: color-mix(in srgb, currentColor 6%, var(--bg-alt)); }
+.rp-section-toggle[aria-expanded="false"] { border-bottom: none; }
+.rp-section-title-text { flex: 1; }
+.rp-section-chevron { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.6; transition: transform var(--dur-fast) var(--ease), opacity var(--dur-fast); }
+.rp-section-chevron--open { transform: rotate(180deg); opacity: 1; }
+
 /* Diamond dot next to section title */
 .rp-section-dot { width: 7px; height: 7px; border-radius: 1px; transform: rotate(45deg); flex-shrink: 0; }
 .rp-section-dot--atk     { background: #c14d36; }
